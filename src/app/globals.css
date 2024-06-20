@@ -34,10 +34,15 @@
     #00000080
   );
 
+
   --callout-rgb: 238, 240, 241;
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  --rounded-full: 9999px;
+  --color-primary: #EA580C;
+  --transition: all .3s ease-in;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -98,6 +103,10 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
 }
 
 @media (prefers-color-scheme: dark) {

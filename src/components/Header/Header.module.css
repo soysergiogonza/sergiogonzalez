@@ -1,0 +1,79 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 80px;
+
+
+}
+
+.logo a {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+
+   }
+
+.navList {
+    background-color: #333333;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /*padding-block: .8rem;*/
+    padding-inline: calc(1rem - .7rem);
+    position: absolute;
+    top: 5rem;
+    right: 1rem;
+    width: 12.5rem;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        top: inherit;
+        width: auto;
+        border-radius: 2rem;
+    }
+}
+
+.navLink {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navLink:hover,
+.navLink:focus {
+    background-color: #ff6600;
+    color: #fff;
+}
+
+.darkModeButton {
+    margin-left: 20px;
+    padding: 8px;
+    background: none;
+    border: 1px solid #555;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.darkModeButton:hover,
+.darkModeButton:focus {
+    background-color: #555;
+}
+.icon {
+    @media (min-width: 768px) {
+        display: none;
+    }
+}

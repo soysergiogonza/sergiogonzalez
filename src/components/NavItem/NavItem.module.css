@@ -1,0 +1,14 @@
+.link {
+ padding-block: 0.5rem;
+ padding-inline: 1.5rem;
+ border-radius: var(--rounded-full);
+ margin-block: 0.25rem;
+ transition: var(--transition);
+ width: fit-content;
+
+}
+
+.active {
+ background: var(--color-primary);
+ transition: var(--transition);
+}
