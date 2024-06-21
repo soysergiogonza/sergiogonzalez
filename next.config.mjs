@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+// biome-ignore lint/style/useNamingConvention: <explanation>
+import withMDX from '@next/mdx';
 
-export default nextConfig;
+const nextConfig = {
+ pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+};
+
+export default withMDX({
+ extension: /\.mdx?$/,
+})(nextConfig);
