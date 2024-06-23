@@ -1,12 +1,12 @@
 'use client';
-import AnyNameOfYourChoice from './articles/vim/page.mdx';
+import { BlogCard } from '@/components';
+import styles from './Blog.module.css';
 
 const Blog = () => {
  return (
-  <>
-   <h1>Blog</h1>
-   <AnyNameOfYourChoice />
-  </>
+  <div className={styles.ContainerBlog}>
+   <BlogCard />
+  </div>
  );
 };
 
