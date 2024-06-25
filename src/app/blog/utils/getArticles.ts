@@ -10,7 +10,7 @@ export const getArticles = async () => {
    'utf-8',
   );
   const { data: frontMatter, content } = matter(markdownWithMeta);
-  const excerpt = `${content.slice(0, 100)}...`;
+  const excerpt = `${content.slice(0, 200)}...`;
   return {
    slug: filename.replace('.mdx', ''),
    frontMatter,

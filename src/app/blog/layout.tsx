@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import styles from './Blog.module.css';
 
 export const metadata: Metadata = {
  title: 'Sergio González Sánchez',
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const LayoutArticleList = async ({ children }) => {
- return <div>{children}</div>;
+ return <main className={styles.main}>{children}</main>;
 };
 
 export default LayoutArticleList;
