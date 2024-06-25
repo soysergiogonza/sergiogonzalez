@@ -1,5 +1,15 @@
-import { ReactNode } from 'react';
+import type { Metadata } from 'next';
 
-export default function MdxLayout({ children }: { children: ReactNode }) {
- return <div style={{ color: 'blue' }}>{children}</div>;
-}
+export const metadata: Metadata = {
+ title: 'Sergio González Sánchez',
+ description: 'Frontend Developer',
+ icons: {
+  icon: 'assets/icons/favicon.svg',
+ },
+};
+
+const LayoutArticleList = async ({ children }) => {
+ return <div>{children}</div>;
+};
+
+export default LayoutArticleList;

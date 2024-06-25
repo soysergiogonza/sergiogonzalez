@@ -10,7 +10,7 @@ export const BlogCard = () => {
   <div className={styles.card}>
    <header className={styles.header}>
     <div>
-     <Link className={styles.title} href='/blog/articles/building-saas-product'>
+     <Link className={styles.title} href='/blog/building-saas-product'>
       Building a SaaS product as a software developer
      </Link>
      <p className={styles.name}>By Sergio González Sánchez</p>
