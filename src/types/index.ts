@@ -26,7 +26,6 @@ export interface MatterFile {
  date: string;
 }
 
-// Convine FrontMatter and MatterFile interfaces into one
 export interface Article extends MatterFile {
  date: string;
 }

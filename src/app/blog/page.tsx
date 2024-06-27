@@ -1,48 +1,25 @@
-import { getArticles } from '@/app/blog/utils/getArticles';
-import Link from 'next/link';
-import styles from './Blog.module.css';
+import { BlogCard } from '@/components';
+import type { MatterFile } from '@/types';
+import { getArticles } from '@/utils/getArticles';
 
 const BlogPage = async () => {
- const articles = await getArticles();
+ const articles: MatterFile[] = await getArticles();
+
  return (
   <>
-   {articles?.map((article) => {
-    const { slug, frontMatter, shortDescription } = article;
-
-    const date = new Date(frontMatter.date)
-     .toLocaleDateString('es-CO', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-     })
-     .toUpperCase();
-
-    return (
-     <div key={slug} className={styles.card}>
-      <time dateTime={frontMatter.date} className={styles.time}>
-       {date}
-      </time>
-      <section className={styles.bodyCard}>
-       <header className={styles.header}>
-        <h2 className={styles.articleTitle}>
-         <Link href={`/blog/${slug}`}>{frontMatter.title}</Link>
-        </h2>
-        <div className={styles.tags}>
-         {frontMatter.tags.map((tag, index) => (
-          <span key={index} className={styles.tag}>
-           {tag}
-          </span>
-         ))}
-        </div>
-       </header>
-       <article className={styles.cardDescription}>{shortDescription}</article>
-       <Link href={`/blog/${slug}`} className={styles.readMore}>
-        Read more →
-       </Link>
-      </section>
-     </div>
-    );
-   })}
+   {articles?.map(
+    ({ slug, frontMatter, shortDescription, date }: MatterFile) => {
+     return (
+      <BlogCard
+       frontMatter={frontMatter}
+       date={date}
+       slug={slug}
+       shortDescription={shortDescription}
+       key={slug}
+      />
+     );
+    },
+   )}
   </>
  );
 };

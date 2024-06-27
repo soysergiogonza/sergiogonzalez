@@ -1,18 +1,11 @@
 import fs from 'fs';
 import path from 'path';
+import { readDirectory } from '@/infrastructure/filesystem/fileReader';
+import { MatterFile } from '@/types';
 import matter, { GrayMatterFile } from 'gray-matter';
 
 export const getArticles = async () => {
- const files: string[] = fs.readdirSync(
-  path.join(process.cwd(), 'src/data/blog'),
- );
-
- interface MatterFile {
-  slug: string;
-  frontMatter: {};
-  content: string;
-  shortDescription: string;
- }
+ const files: string[] = readDirectory();
 
  return files.map((filename: string): MatterFile => {
   const markdownWithMeta: string = fs.readFileSync(
@@ -25,11 +18,21 @@ export const getArticles = async () => {
 
   const shortDescription: string = `${content.slice(0, 200)}...`;
   const slug: string = filename.replace('.mdx', '');
+
+  const date: string = new Date(frontMatter.date)
+   .toLocaleDateString('es-CO', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+   })
+   .toUpperCase();
+
   return {
-   slug,
    frontMatter,
+   date,
    content,
    shortDescription,
+   slug,
   };
  });
 };
