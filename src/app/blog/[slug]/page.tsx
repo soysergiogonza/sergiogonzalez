@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
-import ClientContent from './ClientContent';
+import { ArticleContent } from './ClientContent';
 
 interface Params {
  params: {
@@ -11,11 +11,7 @@ interface Params {
  };
 }
 
-interface Props {
- params: Params;
-}
-
-const ArticlePage = async ({ params }: Props) => {
+const ArticlePage = async ({ params }: Params) => {
  const { slug } = params;
  const filePath = path.join(process.cwd(), 'src/data/blog', `${slug}.mdx`);
  const markdownWithMeta = fs.readFileSync(filePath, 'utf-8');
@@ -34,7 +30,7 @@ const ArticlePage = async ({ params }: Props) => {
      </span>
     ))}
    </div>
-   <ClientContent mdxSource={mdxSource} />
+   <ArticleContent mdxSource={mdxSource} />
   </div>
  );
 };

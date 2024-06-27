@@ -12,10 +12,15 @@ interface Props {
 }
 
 export const NavItem = ({ name, url }: Props) => {
- const pathname = usePathname() === url;
+ const pathname = usePathname();
+ let isActive;
+
+ url === '/'
+  ? (isActive = pathname === url)
+  : (isActive = pathname.includes(url));
 
  return (
-  <Link href={url} className={`${styles.link} ${pathname && styles.active}`}>
+  <Link href={url} className={`${styles.link} ${isActive && styles.active}`}>
    {name}
   </Link>
  );

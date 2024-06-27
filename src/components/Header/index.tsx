@@ -65,9 +65,6 @@ export const Header = () => {
     className={styles.icon}
     onClick={handleOpenMenu}
    />
-   {/* <button className={styles.darkModeButton} aria-label='Toggle Dark Mode'>
-     🌙
-    </button>*/}
   </header>
  );
 };

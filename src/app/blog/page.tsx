@@ -7,7 +7,7 @@ const BlogPage = async () => {
  return (
   <>
    {articles?.map((article) => {
-    const { slug, frontMatter, excerpt } = article;
+    const { slug, frontMatter, shortDescription } = article;
 
     const date = new Date(frontMatter.date)
      .toLocaleDateString('es-CO', {
@@ -35,7 +35,7 @@ const BlogPage = async () => {
          ))}
         </div>
        </header>
-       <article className={styles.cardDescription}>{excerpt}</article>
+       <article className={styles.cardDescription}>{shortDescription}</article>
        <Link href={`/blog/${slug}`} className={styles.readMore}>
         Read more →
        </Link>
