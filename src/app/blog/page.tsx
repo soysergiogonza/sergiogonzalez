@@ -9,11 +9,13 @@ const BlogPage = async () => {
    {articles?.map((article) => {
     const { slug, frontMatter, excerpt } = article;
 
-    const date = new Date(frontMatter.date).toLocaleDateString('es-CO', {
-     year: 'numeric',
-     month: 'long',
-     day: 'numeric',
-    });
+    const date = new Date(frontMatter.date)
+     .toLocaleDateString('es-CO', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+     })
+     .toUpperCase();
 
     return (
      <div key={slug} className={styles.card}>

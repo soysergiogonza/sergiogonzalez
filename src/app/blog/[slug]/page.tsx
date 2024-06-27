@@ -1,10 +1,21 @@
+// src/app/blog/[slug]/page.tsx
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import { serialize } from 'next-mdx-remote/serialize';
+import ClientContent from './ClientContent';
 
-const ArticlePage = async ({ params }) => {
+interface Params {
+ params: {
+  slug: string;
+ };
+}
+
+interface Props {
+ params: Params;
+}
+
+const ArticlePage = async ({ params }: Props) => {
  const { slug } = params;
  const filePath = path.join(process.cwd(), 'src/data/blog', `${slug}.mdx`);
  const markdownWithMeta = fs.readFileSync(filePath, 'utf-8');
@@ -12,17 +23,27 @@ const ArticlePage = async ({ params }) => {
  const mdxSource = await serialize(content);
 
  return (
-  <div>
+  <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
    <h1>{frontMatter.title}</h1>
-   <p>{frontMatter.date}</p>
+   <p>{new Date(frontMatter.created).toLocaleDateString()}</p>
+   <p>{frontMatter.category}</p>
    <div>
-    {frontMatter.tags.map((tag, index) => (
-     <span key={index}>{tag}</span>
+    {frontMatter.tags.map((tag: string, index: number) => (
+     <span key={index} style={{ marginRight: '10px' }}>
+      {tag}
+     </span>
     ))}
    </div>
-   <MDXRemote {...mdxSource} />
+   <ClientContent mdxSource={mdxSource} />
   </div>
  );
 };
 
 export default ArticlePage;
+
+export const generateStaticParams = async () => {
+ const files = fs.readdirSync(path.join(process.cwd(), 'src/data/blog'));
+ return files.map((filename) => ({
+  params: { slug: filename.replace('.mdx', '') },
+ }));
+};

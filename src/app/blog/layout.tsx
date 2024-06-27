@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import styles from './Blog.module.css';
 
 export const metadata: Metadata = {
- title: 'Sergio González Sánchez',
+ title: 'Blog',
  description: 'Frontend Developer',
  icons: {
   icon: 'assets/icons/favicon.svg',
