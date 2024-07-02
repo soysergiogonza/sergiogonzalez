@@ -1,31 +1,29 @@
 'use client';
 
-import { BlogCard } from '@/components';
-import { FilterHeader } from '@/components/FilterHeader';
-import { useArticles } from '@/services/articles/articles.hooks';
+import { BlogCard, FilterHeader } from '@/components/blog';
+import { useArticles } from '@/services/articles';
 import { MatterFile } from '@/types';
 import { useEffect, useState } from 'react';
 
 const BlogPage = () => {
  const { data: articles = [], isLoading, error } = useArticles();
- const [filteredArticles, setFilteredArticles] =
-  useState<MatterFile[]>(articles);
+ const [filteredArticles, setFilteredArticles] = useState<MatterFile[]>([]);
  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
  useEffect(() => {
-  if (selectedCategory) {
+  if (selectedCategory === 'All' || selectedCategory === null) {
+   setFilteredArticles(articles);
+  } else {
    setFilteredArticles(
     articles.filter(({ frontMatter }) =>
      frontMatter.category.includes(selectedCategory),
     ),
    );
-  } else {
-   setFilteredArticles(articles);
   }
  }, [selectedCategory, articles]);
 
- const handleFilterChange = (category: string) => {
-  setSelectedCategory(category);
+ const handleFilterChange = (category: string | null) => {
+  setSelectedCategory(category === 'All' ? null : category);
  };
 
  if (isLoading) return <div>Loading...</div>;

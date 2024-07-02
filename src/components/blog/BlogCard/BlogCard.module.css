@@ -7,15 +7,22 @@
     max-width: 800px;
     margin: 0 auto;
 
+    @media (min-width: 768px) {
+        flex-direction: row;
+        gap: 2rem;
+    }
+
     .time {
         color: rgb(156 163 175);
         font-size: 1rem;
         font-weight: 500;
+        width:300px ;
     }
     .bodyCard {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+
         .header {
             display: flex;
             flex-direction: column;

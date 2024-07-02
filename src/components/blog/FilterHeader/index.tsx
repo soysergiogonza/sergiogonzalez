@@ -5,16 +5,16 @@ import styles from './FilterHeader.module.css';
 
 interface FilterHeaderProps {
  categories: string[];
- onFilterChange: (selectedCategory: string) => void;
+ onFilterChange: (selectedCategory: string | null) => void;
 }
 
 export const FilterHeader = ({
  categories,
  onFilterChange,
 }: FilterHeaderProps) => {
- const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+ const [selectedCategory, setSelectedCategory] = useState<string | null>('All');
 
- const handleFilterChange = (category: string) => {
+ const handleFilterChange = (category: string | null) => {
   setSelectedCategory(category);
   onFilterChange(category);
  };
@@ -22,8 +22,8 @@ export const FilterHeader = ({
  return (
   <div className={styles.filterHeader}>
    <button
-    className={`${styles.filterButton} ${selectedCategory === null ? styles.active : ''}`}
-    onClick={() => handleFilterChange('')}
+    className={`${styles.filterButton} ${selectedCategory === 'All' ? styles.active : ''}`}
+    onClick={() => handleFilterChange('All')}
    >
     All
    </button>

@@ -1,1 +1,2 @@
-export * from './BlogCard';
+export * from './blog/BlogCard';
+export * from './NavItem';

@@ -1,0 +1,22 @@
+.filterHeader {
+    display: flex;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-block-end: 20px;
+
+    .filterButton {
+        padding: 10px 20px;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        &.active {
+            color: white;
+            border-bottom: 1px solid #EA580C;
+        }
+    }
+}
+
+
+
