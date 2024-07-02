@@ -15,6 +15,7 @@ export interface Projects {
 export interface FrontMatter {
  title: string;
  date: string;
+ description: string;
  tags: string[];
 }
 
@@ -22,7 +23,6 @@ export interface MatterFile {
  slug: string;
  frontMatter: FrontMatter;
  content?: string;
- shortDescription: string;
  date: string;
 }
 

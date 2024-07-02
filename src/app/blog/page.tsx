@@ -35,18 +35,12 @@ const BlogPage = () => {
   <>
    <FilterHeader
     categories={Array.from(
-     new Set(articles.flatMap((article) => article.frontMatter.category)),
+     new Set(articles.flatMap(({ frontMatter }) => frontMatter.category)),
     )}
     onFilterChange={handleFilterChange}
    />
-   {filteredArticles.map(({ slug, frontMatter, shortDescription, date }) => (
-    <BlogCard
-     frontMatter={frontMatter}
-     date={date}
-     slug={slug}
-     shortDescription={shortDescription}
-     key={slug}
-    />
+   {filteredArticles.map(({ slug, frontMatter, date }) => (
+    <BlogCard frontMatter={frontMatter} date={date} slug={slug} key={slug} />
    ))}
   </>
  );
