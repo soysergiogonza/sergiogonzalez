@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/Header';
+import { NextFont } from 'next/dist/compiled/@next/font';
 import { ReactNode } from 'react';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter: NextFont = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
  title: 'Sergio González Sánchez',
@@ -14,11 +15,11 @@ export const metadata: Metadata = {
  },
 };
 
-export default function RootLayout({
+const RootLayout = ({
  children,
 }: Readonly<{
  children: ReactNode;
-}>) {
+}>) => {
  return (
   <html lang='en'>
    <body className={inter.className}>
@@ -27,4 +28,6 @@ export default function RootLayout({
    </body>
   </html>
  );
-}
+};
+
+export default RootLayout;
