@@ -15,6 +15,7 @@
 
         @media (min-width: 768px) {
             flex-direction: row;
+            align-items: center;
         }
 
         .title {
@@ -27,6 +28,7 @@
                 color: #9EABB8;
             }
     }
+        
         .callToActionButton {
             background-color: #FF6C44;
             color: #FFFFFF;
@@ -36,8 +38,25 @@
             font-size: 1rem;
             cursor: pointer;
             height: fit-content;
+            width: fit-content;
         }
 }
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-size: 1.2rem;
+
+    .aboutDescription {
+        font-size: 1rem;
+
+
+        @media (min-width: 768px) {
+            font-size: 1.5rem;
+        }
+    }
+}
+
     .skills {
         font-size: 1.5rem;
         display: flex;
@@ -55,6 +74,7 @@
                 padding: .2rem 1rem;
                 border-radius: 0.5rem;
                 font-size: 1rem;
+                font-weight: 700;
             }
         }
     }
@@ -63,81 +83,85 @@
 .timeline {
     margin: 4em auto;
     position: relative;
-    max-width: 46em;
+
+    &:before {
+        content: '';
+        margin-left: -2px;
+        position: absolute;
+        top: 0;
+        width: 4px;
+        height: 100%;
+    }
+
+    .timelineEvent {
+        position: relative;
+
+        &:hover {
+            .timelineEventIcon {
+                transform: rotate(-45deg);
+                background-color: rgb(16, 16, 32);
+            }
+        }
+
+        .timelineEventIcon {
+            transition: transform 0.2s ease-in;
+            transform: rotate(45deg);
+            background-color: rgb(16, 16, 32);
+            outline: 10px solid #91CEC2;
+            display: block;
+            margin: 0.5em 0.5em 0.5em -0.5em;
+            position: absolute;
+            top: 0;
+            width: 1em;
+            height: 1em;
+        }
+
+        .timelineEventCopy {
+            padding: 2em;
+            position: relative;
+            width: 100%;
+            max-width: 100ch;
+
+            @media (min-width: 768px) {
+                left: 4em;
+                font-size: 1.5em;
+            }
+
+            .timelineEventThumbnail {
+                transition: box-shadow 0.5s ease-in 0.1s;
+                color: white;
+                font-size: 1em;
+                font-weight: bold;
+                display: inline-block;
+                margin-bottom: 1.2em;
+                padding: 0.25em 1em 0.2em 1em;
+                background-color: #91CEC2;
+            }
+
+            .companyName {
+                font-size: 1.2em;
+                margin-bottom: 1.2em;
+            }
+
+            .headExperience {
+                .title {
+                    font-size: 1.2em;
+                }
+            }
+
+            .responsibilitiesList {
+                .responsibility {
+                    &:before {
+                        content: "✣ ";
+                    }
+                }
+            }
+        }
+    }
 }
 
-.timeline:before {
-    background-color: blue;
-    content: '';
-    margin-left: -2px;
-    position: absolute;
-    top: 0;
-    width: 4px;
-    height: 100%;
-}
-
-.timelineEvent {
-    position: relative;
-}
-
-.timelineEvent:hover .timelineEventIcon {
-    transform: rotate(-45deg);
-    background-color: green;
-}
-
-.timelineEvent:hover .timelineEventThumbnail {
-    box-shadow: inset 40em 0 0 0 red;
-}
-
-.timelineEventCopy {
-    padding: 2em;
-    position: relative;
-    top: -1.875em;
-    left: 4em;
-    width: 80ch;
-}
-
-.timelineEventCopy h3 {
-    font-size: 1.75em;
-}
-
-.timelineEventCopy h4 {
-    font-size: 1.2em;
-    margin-bottom: 1.2em;
-}
-
-.timelineEventCopy strong {
-    font-weight: 700;
-}
-
-.timelineEventCopy p:not(.timelineEventThumbnail) {
-    padding-bottom: 1.2em;
-}
-
-.timelineEventIcon {
-    transition: transform 0.2s ease-in;
-    transform: rotate(45deg);
-    background-color: blueviolet;
-    outline: 10px solid rebeccapurple;
-    display: block;
-    margin: 0.5em 0.5em 0.5em -0.5em;
-    position: absolute;
-    top: 0;
-    width: 1em;
-    height: 1em;
-}
-
-.timelineEventThumbnail {
-    transition: box-shadow 0.5s ease-in 0.1s;
-    color: white;
-    font-size: 0.75em;
-    background-color: pink;
-    box-shadow: inset 0 0 0 0 #ef795a;
-    display: inline-block;
-    margin-bottom: 1.2em;
-    padding: 0.25em 1em 0.2em 1em;
-}
-
-.responsibility::before{
-    content:"✣ ";
+.sectionTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #91CEC2;
 }
