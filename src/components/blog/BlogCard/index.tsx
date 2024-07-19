@@ -1,10 +1,10 @@
 'use client';
 
-import type { Article } from '@/types';
+import { ArticleProps } from '@/types/blog';
 import Link from 'next/link';
 import styles from './BlogCard.module.css';
 
-export const BlogCard = ({ frontMatter, date, slug }: Article) => {
+export const BlogCard = ({ frontMatter, date, slug }: ArticleProps) => {
  return (
   <div key={slug} className={styles.card}>
    <time dateTime={frontMatter.date} className={styles.time}>

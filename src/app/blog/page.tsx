@@ -2,12 +2,12 @@
 
 import { BlogCard, FilterHeader } from '@/components/blog';
 import { useArticles } from '@/services/articles';
-import { MatterFile } from '@/types';
+import { ArticleProps } from '@/types/blog';
 import { useEffect, useState } from 'react';
 
 const BlogPage = () => {
  const { data: articles = [], isLoading, error } = useArticles();
- const [filteredArticles, setFilteredArticles] = useState<MatterFile[]>([]);
+ const [filteredArticles, setFilteredArticles] = useState<ArticleProps[]>([]);
  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
  useEffect(() => {
@@ -15,7 +15,7 @@ const BlogPage = () => {
    setFilteredArticles(articles);
   } else {
    setFilteredArticles(
-    articles.filter(({ frontMatter }) =>
+    articles.filter(({ frontMatter }: ArticleProps) =>
      frontMatter.category.includes(selectedCategory),
     ),
    );
@@ -33,11 +33,13 @@ const BlogPage = () => {
   <>
    <FilterHeader
     categories={Array.from(
-     new Set(articles.flatMap(({ frontMatter }) => frontMatter.category)),
+     new Set(
+      articles.flatMap(({ frontMatter }: ArticleProps) => frontMatter.category),
+     ),
     )}
     onFilterChange={handleFilterChange}
    />
-   {filteredArticles.map(({ slug, frontMatter, date }) => (
+   {filteredArticles.map(({ slug, frontMatter, date }: ArticleProps) => (
     <BlogCard frontMatter={frontMatter} date={date} slug={slug} key={slug} />
    ))}
   </>
