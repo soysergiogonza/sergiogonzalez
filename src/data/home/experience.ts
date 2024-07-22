@@ -1,20 +1,42 @@
-export const experience = [
+import { Experience } from '@/types/home';
+
+export const experience: Experience[] = [
  {
   companyName: 'Wyncell',
-  title: 'Frontend Developer Leader',
-  responsibilities: [
-   'Consumir servicios API.',
-   'Enseñar a mis estudiantes según los estandares del Servicio Nacional de Aprendizaje SENA',
-  ],
-  date: '17 Jun 2024',
+  title: 'Frontend Developer Lead',
+  startDate: '17 Jun 2024',
+  scheduleType: 'Full Time',
+  image: '/assets/images/wyncell.svg',
  },
  {
   companyName: 'Politécnico Asys',
   title: 'Software Developer Teacher',
-  responsibilities: [
-   'Ayudar a mis estudiantes a desarrollar su sentido de la lógica y diseño.',
-   'Enseñar a mis estudiantes según los estandares del Servicio Nacional de Aprendizaje SENA',
-  ],
-  date: '17 Jun 2024',
+  startDate: '17 Jun 2024',
+  scheduleType: 'Temporada',
+  image: '/assets/images/cover-figma.png',
+ },
+ {
+  companyName: 'ARK',
+  title: 'Frontend Mobile Developer',
+  startDate: '08 Abril 2024',
+  endDate: '17 Junio 2024',
+  scheduleType: 'FreeLancer',
+  image: '/assets/images/cover-figma.png',
+ },
+ {
+  companyName: 'EvolutionCode',
+  title: 'React Frontend Developer',
+  startDate: 'Septiembre 2022',
+  endDate: 'Septiembre 2023',
+  scheduleType: 'Temporada',
+  image: '/assets/images/cover-figma.png',
+ },
+ {
+  companyName: 'Cetasdi',
+  title: 'Teacher Fullstack Web Developer',
+  startDate: 'Noviembre 2020',
+  endDate: 'Noviembre 2021',
+  scheduleType: 'Temporada',
+  image: '/assets/images/cover-figma.png',
  },
 ];

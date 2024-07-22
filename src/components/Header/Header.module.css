@@ -4,7 +4,7 @@
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     height: 5rem;
-    color: #fff;
+    color: #FFF;
     max-width: 120ch;
     margin: 0 auto;
     padding-inline: 2rem;
@@ -21,7 +21,7 @@
    }
 
 .navList {
-    background-color: #333333;
+    background-color: var(--bg-grey);
     border-radius: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -39,20 +39,6 @@
         border-radius: 2rem;
         position: relative;
     }
-}
-
-.navLink {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.navLink:hover,
-.navLink:focus {
-    background-color: #ff6600;
-    color: #fff;
 }
 
 .darkModeButton {

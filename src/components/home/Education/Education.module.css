@@ -1,0 +1,85 @@
+.timeline {
+ margin: 4em auto;
+ position: relative;
+
+ &:before {
+  content: '';
+  margin-left: -2px;
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 100%;
+ }
+
+ .timelineEvent {
+  position: relative;
+
+  &:hover {
+   .timelineEventIcon {
+    transform: rotate(-45deg);
+    background-color: var(--background-color);
+   }
+  }
+
+  .timelineEventIcon {
+   transition: var(--transition);
+   transform: rotate(45deg);
+   background-color: var(--background-color);
+   outline: 10px solid var(--titles-special);
+   display: block;
+   margin: 0.5em 0.5em 0.5em -0.5em;
+   position: absolute;
+   top: 0;
+   width: 1em;
+   height: 1em;
+  }
+
+  .timelineEventCopy {
+   padding: 2em;
+   position: relative;
+   width: 100%;
+   max-width: 100ch;
+
+   @media (min-width: 768px) {
+    left: 4em;
+    font-size: 1.5em;
+   }
+
+   .timelineEventThumbnail {
+    transition: var(--transition);
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 1.2em;
+    padding: 0.25em 1em 0.2em 1em;
+    background-color: var(--titles-special);
+   }
+
+   .companyName {
+    font-size: 1.2em;
+    margin-bottom: 1.2em;
+   }
+
+   .headExperience {
+    .title {
+     font-size: 1.2em;
+    }
+   }
+
+   .responsibilitiesList {
+    .responsibility {
+     &:before {
+      content: "✣ ";
+     }
+    }
+   }
+  }
+ }
+}
+
+.sectionTitle {
+ font-size: 2rem;
+ font-weight: bold;
+ color: var(--titles-special);
+}

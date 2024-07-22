@@ -1,7 +1,6 @@
 .main {
     max-width: 120ch;
     margin: 2rem auto;
-    color: #FFFFFF;
     padding-inline: 2rem;
     display: flex;
     flex-direction: column;
@@ -25,13 +24,12 @@
             .professionalTitle {
                 font-size: 1.5rem;
                 font-weight: normal;
-                color: #9EABB8;
+                color: var(--span-subDescription);
             }
     }
-        
+
         .callToActionButton {
-            background-color: #FF6C44;
-            color: #FFFFFF;
+            background-color: var(--primary-color);
             padding: .75rem 1rem;
             border-radius: 0.75rem;
             font-weight: bold;
@@ -69,8 +67,7 @@
             gap: 1rem;
 
             .skill {
-                background-color: #FF6C44;
-                color: #FFFFFF;
+                background-color: var(--primary-color);
                 padding: .2rem 1rem;
                 border-radius: 0.5rem;
                 font-size: 1rem;
@@ -80,88 +77,3 @@
     }
 }
 
-.timeline {
-    margin: 4em auto;
-    position: relative;
-
-    &:before {
-        content: '';
-        margin-left: -2px;
-        position: absolute;
-        top: 0;
-        width: 4px;
-        height: 100%;
-    }
-
-    .timelineEvent {
-        position: relative;
-
-        &:hover {
-            .timelineEventIcon {
-                transform: rotate(-45deg);
-                background-color: rgb(16, 16, 32);
-            }
-        }
-
-        .timelineEventIcon {
-            transition: transform 0.2s ease-in;
-            transform: rotate(45deg);
-            background-color: rgb(16, 16, 32);
-            outline: 10px solid #91CEC2;
-            display: block;
-            margin: 0.5em 0.5em 0.5em -0.5em;
-            position: absolute;
-            top: 0;
-            width: 1em;
-            height: 1em;
-        }
-
-        .timelineEventCopy {
-            padding: 2em;
-            position: relative;
-            width: 100%;
-            max-width: 100ch;
-
-            @media (min-width: 768px) {
-                left: 4em;
-                font-size: 1.5em;
-            }
-
-            .timelineEventThumbnail {
-                transition: box-shadow 0.5s ease-in 0.1s;
-                color: white;
-                font-size: 1em;
-                font-weight: bold;
-                display: inline-block;
-                margin-bottom: 1.2em;
-                padding: 0.25em 1em 0.2em 1em;
-                background-color: #91CEC2;
-            }
-
-            .companyName {
-                font-size: 1.2em;
-                margin-bottom: 1.2em;
-            }
-
-            .headExperience {
-                .title {
-                    font-size: 1.2em;
-                }
-            }
-
-            .responsibilitiesList {
-                .responsibility {
-                    &:before {
-                        content: "✣ ";
-                    }
-                }
-            }
-        }
-    }
-}
-
-.sectionTitle {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #91CEC2;
-}
