@@ -1,7 +1,11 @@
+'use client';
+
 import { Education, ProfessionalExperience } from '@/components/home';
 import { Krypton } from '@/utils/utils';
 import Link from 'next/link';
 import styles from './Home.module.css';
+
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 const Home = () => {
  return (
@@ -32,16 +36,30 @@ const Home = () => {
    </article>
    <article className={styles.about}>
     <h2 className={`${styles.sectionTitle} ${Krypton.className}`}>About</h2>
-    <p className={styles.aboutDescription}>
-     Frontend developer with 2+ years of experience, specialized in React,
-     Next.js, JavaScript and TypeScript. I work with API integration using Rest
-     and Axios, state management with Redux and React-Query. I apply unit
-     testing with Playwright and with a focus on a clean software architecture.
-     Currently, I am constantly improving my skills studying Technology in
-     Software Analysis and Development at SENA with a focus on Frontend
-     Architecture. I am passionate about teaching and constant development in
-     IT.
-    </p>
+    <div className={styles.aboutDescription}>
+     <p className={styles.paragraph}>
+      Desarrollador Frontend con 3 años de experiencia, apasionado por crear
+      productos escalables y fáciles de usar, utilizo las mejores prácticas de
+      la industria con un enfoque en Micro-Frontend y Arquitectura Limpia. Poseo
+      sólidas habilidades en React, Next.js, JavaScript, y TypeScript. también
+      he trabajando constantemente con State Management como Redux y React
+      Query.
+     </p>
+     <p className={styles.paragraph}>
+      Poseo conocimientos en UX/UI, y he usado librerías de CSS como Material
+      UI, Tailwind CSS y Bootstrap.Por ahora todos mis conocimientos los he
+      conseguido con el tiempo trabajando especialmente en startups ubicadas en
+      Estados Unidos en proyectos e-commerce y plataformas de administración.
+      Actualmente trabajo en el desarrollo de una aplicación de
+      Telecomunicaciones desde cero con React + Next + TypeScript.
+     </p>
+     <p className={styles.paragraph}>
+      Por último tengo experiencia como docente en Análisis y Desarrollo de
+      Software, lo que me ha permitido desarrollar fuertes habilidades para
+      resolver problemas, comunicarme asertivamente y liderar proyectos de
+      software.
+     </p>
+    </div>
    </article>
    <ProfessionalExperience />
    {/*<Education />*/}

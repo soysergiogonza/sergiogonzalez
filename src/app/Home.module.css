@@ -47,6 +47,13 @@
 
     .aboutDescription {
         font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .paragraph {
+            text-wrap: pretty;
+        }
 
 
         @media (min-width: 768px) {
@@ -77,3 +84,8 @@
     }
 }
 
+.sectionTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--titles-special);
+}

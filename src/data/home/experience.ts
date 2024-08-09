@@ -13,7 +13,7 @@ export const experience: Experience[] = [
   title: 'Software Developer Teacher',
   startDate: '17 Jun 2024',
   scheduleType: 'Temporada',
-  image: '/assets/images/cover-figma.png',
+  image: '/assets/images/asys.png',
  },
  {
   companyName: 'ARK',
@@ -21,7 +21,7 @@ export const experience: Experience[] = [
   startDate: '08 Abril 2024',
   endDate: '17 Junio 2024',
   scheduleType: 'FreeLancer',
-  image: '/assets/images/cover-figma.png',
+  image: '/assets/images/ARK.svg',
  },
  {
   companyName: 'EvolutionCode',
@@ -29,7 +29,7 @@ export const experience: Experience[] = [
   startDate: 'Septiembre 2022',
   endDate: 'Septiembre 2023',
   scheduleType: 'Temporada',
-  image: '/assets/images/cover-figma.png',
+  image: '/assets/images/evolutioncode.jpeg',
  },
  {
   companyName: 'Cetasdi',
@@ -37,6 +37,6 @@ export const experience: Experience[] = [
   startDate: 'Noviembre 2020',
   endDate: 'Noviembre 2021',
   scheduleType: 'Temporada',
-  image: '/assets/images/cover-figma.png',
+  image: '/assets/images/cetasdi.svg',
  },
 ];

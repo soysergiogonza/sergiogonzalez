@@ -1,7 +1,7 @@
 'use client';
 import { NavItem } from '@/components/NavItem';
 import { pages } from '@/data/routes';
-import Logo from '@assets/icons/Logo.svg';
+// import Logo from '@assets/icons/Logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -47,9 +47,9 @@ export const Header = () => {
  return (
   <header className={styles.header}>
    <picture className={styles.logo}>
-    <Link href='/'>
+    {/* <Link href='/'>
      <Image src={Logo} alt='logo' width={100} height={100} priority />
-    </Link>
+    </Link>*/}
    </picture>
    {isMenuOpen && (
     <nav className={styles.nav}>

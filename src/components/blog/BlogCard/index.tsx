@@ -16,7 +16,7 @@ export const BlogCard = ({ frontMatter, date, slug }: ArticleProps) => {
       <Link href={`/blog/${slug}`}>{frontMatter.title}</Link>
      </h2>
      <div className={styles.tags}>
-      {frontMatter.tags.map((tag: string) => (
+      {frontMatter.tags?.map((tag: string) => (
        <span key={tag} className={styles.tag}>
         {tag}
        </span>

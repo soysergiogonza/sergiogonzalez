@@ -16,7 +16,7 @@ const BlogPage = () => {
   } else {
    setFilteredArticles(
     articles.filter(({ frontMatter }: ArticleProps) =>
-     frontMatter.category.includes(selectedCategory),
+     frontMatter.category?.includes(selectedCategory),
     ),
    );
   }

@@ -1,17 +1,5 @@
 .timeline {
     margin: 4em auto;
-    position: relative;
-
-    &:before {
-        content: '';
-        margin-left: -2px;
-        position: absolute;
-        top: 0;
-        width: 4px;
-        height: 100%;
-        z-index: -1;
-        background-color: var(--global-color);
-    }
 
     .timelineEvent {
         display: flex;
@@ -23,7 +11,7 @@
         .companyImage {
             width: 100px;
             height: 100px;
-            background-color: white;
+            /*background-color: white;*/
             padding: 0.5rem;
 
             .image {
