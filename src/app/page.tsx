@@ -1,11 +1,9 @@
 'use client';
 
-import { Education, ProfessionalExperience } from '@/components/home';
+import { ProfessionalExperience } from '@/components/home';
 import { Krypton } from '@/utils/utils';
 import Link from 'next/link';
 import styles from './Home.module.css';
-
-import { motion, useScroll, useSpring } from 'framer-motion';
 
 const Home = () => {
  return (
@@ -62,7 +60,6 @@ const Home = () => {
     </div>
    </article>
    <ProfessionalExperience />
-   {/*<Education />*/}
   </main>
  );
 };
