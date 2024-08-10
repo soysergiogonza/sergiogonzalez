@@ -1,5 +1,6 @@
 import { experience } from '@/data/home/experience';
 import { Krypton } from '@/utils/utils';
+import Image from 'next/image';
 import styles from './ProfessionalExperience.module.css';
 
 export const ProfessionalExperience = () => {
@@ -12,7 +13,13 @@ export const ProfessionalExperience = () => {
     {experience.map((project, index) => (
      <li className={styles.timelineEvent}>
       <picture className={styles.companyImage}>
-       <img src={project.image} alt='' className={styles.image} />
+       <Image
+        src={project.image}
+        alt={project.companyName}
+        width={100}
+        height={100}
+        className={styles.image}
+       />
       </picture>
       <div className={styles.timelineEventCopy}>
        <p className={styles.titleExperienceItem}>{project.title}</p>
