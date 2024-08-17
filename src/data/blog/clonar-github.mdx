@@ -1,0 +1,139 @@
+---
+title: 'Clonar repo y subir cambios'
+description: 'Clonar un repositorio de GitHub y subir cambios realizados en el repositorio local al repositorio remoto en GitHub.'
+date: '2024-08-17'
+banner: '/assets/images/git-logo.svg'
+category: 'Git & GitHub'
+colors: ['#FFFFFF', '#132362']
+tags: ['VCS', 'Control de Versiones', 'Git', 'GitHub']
+anterior: '/blog/github-first_repo'
+
+[//]: # (siguiente: '/blog/GitAndGitHub2')
+---
+
+En artículos anteriores aprendimos como configurar Git en local, aprendimos como crear un repo en GitHub y clonarlo.
+Ahora vamos a aprender como interactúa finalmente Git con GitHub o dicho de otra forma la parte local con la parte
+remota.
+
+Cuando hacemos clone de un repo de GitHub, estamos haciendo una copia de ese repo que se encuentra en la nube, hacia
+nuestro local.
+
+En mi caso voy a descargar el repo [prueba](https://github.com/soysergiogonza/prueba) que hemos creado en GitHub, solo
+contiene un archivo `README.md`, `LICENSE` y `.gitignore`.\
+Debemos hacer un `cd prueba` y más o menos así debe lucir la terminal después clonar el repo dentro del directorio
+`Workspace`.
+![Image](../../assets/images/terminal-clone.png)
+
+Como podemos notar, después de haber descargado el repositorio `prueba`, se creó un directorio con el mismo nombre
+del repositorio.
+
+Apenas estamos dentro de la carpeta `prueba`, podemos ver los archivos usando el comando `ls`. Lo cual por el momento
+solo nos muestra el archivo `README.md` y `LICENSE`.
+![Image](../../assets/images/ls.png)
+
+También podemos ver el contenido oculto de la carpeta usando `ls -all`.
+![Image](../../assets/images/ls-all.png)
+
+Cuando un archivo o directorio comienza con un punto **(.)** significa que está oculto, en el caso del ejemplo tenemos
+el archivo `.gitignore` y el directorio `.git`. El archivo `.gitignore` nos permite ignorar archivos o directorios que
+no queremos que sean rastreados por Git. El directorio `.git` es el directorio que contiene toda la información y registros
+necesarios para que nuestro repositorio local trabaje con Git y a su vez nos va a permitir interactuar con los repositorios remotos.
+
+# Subir cambios a GitHub
+
+Para poder subir cambios a GitHub, primero es necesario hacer cambios en el repositorio local de nuestro proyecto
+`prueba`.
+
+Para ello vamos a seguir los pasos listados a continuación:
+
+1.  Abrir el proyecto `prueba` con nuestro editor de texto favorito.
+
+2.  Abrir la terminal y asegurarse de estar en el directorio del proyecto `prueba`.
+
+3.  Si estamos en el directorio `prueba` que descargamos debería aparecer el nombre de la rama en la que estamos
+trabajando, como no hemos hecho más configuraciones, entonces debería aparecer `main` por defecto.
+
+4.  Modificar el archivo `README.md` agregando nada más que nuestro nombre.
+    ![Image](../../assets/images/readme.png)
+
+5.  Guardar los cambios en el archivo `README.md` con `Ctrl + S` o `Cmd + S`.
+    - En Visual Studio Code, vas a notar un punto blanco en la parte superior derecha de la pestaña del archivo
+    `README.md`. Eso indica que el archivo ha sido modificado y no ha sido guardado. Al guardar el archivo, el punto
+    blanco desaparecerá, lo cual indica que no hay cambios pendientes por guardar.
+
+6.  Abrir la terminal y asegurarse de estar en el directorio del proyecto `prueba` y en la rama `main`.
+
+7.  Verificar los cambios realizados en el repositorio local con el comando `git status`.
+    - El comando `git status` nos muestra que archivos han sufrido cambios en el repositorio local, podríamos decir
+    que nos muestra el estado del proyecto.
+    ![Image](../../assets/images/git-status.png)
+
+8. Los archivos que han sido modificados aparecen en rojo, en este caso el archivo `README.md` ha sido modificado.
+También aparecen en rojo los archivos que no han sido rastreados por Git, en este caso el archivo `.idea/`. Este
+archivo es un directorio que ha sido creado por el editor de texto y no queremos que sea rastreado por Git, por lo que
+lo vamos a ignorar agregándolo al archivo `.gitignore`.
+    > Como se ve en la imagen anterior, la terminal indica si el archivo ha sido modificado y no ha sido agregado al
+    área de espera, o, por otro lado, si no está siendo rastreado por Git. En la siguiente imagen se muestra el
+   nuevo estado después de haber agregado el archivo `.idea/` al archivo `.gitignore`.
+    ![Image](../../assets/images/git-status2.png)
+
+9.  Agregar los cambios realizados al área de espera.
+    - El comando `git add` nos permite agregar los cambios realizados en el archivo `README.md` al área de espera.
+    - Si queremos agregar todos los cambios realizados en el repositorio local al área de espera, podemos usar el
+    comando `git add .`.
+
+10. Verificar que los cambios han sido agregados al área de espera con el comando `git status`.
+    - Como ya sabemos, el comando `git status` nos muestra el estado de los archivos en el repositorio local.
+    - En este caso, nos muestra que el archivo `README.md` y `.gitignore` han sido modificados, agregado al área de
+    espera y está listo para ser confirmado.
+    ![Image](../../assets/images/git-status3.png)
+
+11. Confirmar los cambios realizados
+    - El comando `git commit -m` nos permite confirmar los cambios realizados en el repositorio local.
+    - El mensaje del commit es un mensaje que nos permite identificar los cambios realizados en el repositorio local.
+    - El comando quedaría de la siguiente manera
+    ```bash
+     git commit -m "Agregué mi nombre a README.md"
+    ```
+    - Cuando hacemos el commit nos muestra algunos detalles como la `rama`, `id` y el `mensaje` del commit.
+
+12. Existe la posibilidad de que se nos pida configurar nuestro nombre y correo electrónico.
+    - Si es la primera vez que hacemos un commit en nuestra máquina, Git nos va a pedir que configuremos nuestro nombre y correo electrónico.
+    - Para configurar nuestro nombre y correo electrónico, podemos seguir las instrucciones que aparecen en la
+    terminal o en el artículo <span style={{color: 'blue'}}>[Configuración de Git](/blog/git-config).</span>
+    ![Image](../../assets/images/git-auth.png)
+
+13. Verificar que los cambios han sido confirmados con el comando `git status`.
+    - El comando `git status` nos muestra el estado de los archivos en el repositorio local.
+    - En este caso, nos muestra que no hay cambios pendientes por confirmar.
+    ![Image](../../assets/images/git-status4.png)
+
+14. Subir los cambios al repositorio remoto
+    - El comando `git push origin rama` nos permite subir los cambios realizados en el repositorio local al repositorio
+    remoto.
+    - En este caso el comando quedaría de la siguiente manera
+    ```bash
+    git push origin main
+    ```
+    - El comando `git push origin main` nos permite subir los cambios realizados en el repositorio local al
+    repositorio remoto en la rama `main`.
+
+15. Verificar que los cambios han llegado al repositorio remoto en GitHub.
+    - Si vamos a nuestro repositorio remoto, vamos a notar que se han subido los cambios realizados en el repositorio en
+    la rama `main`.
+    ![Image](../../assets/images/repo-prueba-github.png)
+    - Notemos que el archivo `README.md` ha sido modificado y que todos los cambios que hicimos en el repositorio
+    local ha llegado al repositorio remoto.
+
+<span style={{color: 'red', fontWeight: "bold"}}>¡Listo! Hemos subido cambios al repositorio remoto en GitHub.</span>
+
+### Comandos de la terminal utilizados en este artículo
+`ls` - Muestra los archivos y directorios en el directorio actual.\
+`ls -all` - Muestra los archivos y directorios, incluyendo los archivos ocultos.
+
+### Comandos de Git utilizados en este artículo
+`git status` - Muestra el estado de los archivos en el repositorio local.\
+`git add` - Agrega los cambios realizados en el repositorio local al área de espera.\
+`git commit -m` - Confirma los cambios realizados en el repositorio local.\
+`git push origin rama` - Sube los cambios realizados en el repositorio local al repositorio remoto.
+

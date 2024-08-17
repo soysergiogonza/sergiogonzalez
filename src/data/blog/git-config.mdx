@@ -1,0 +1,56 @@
+---
+title: 'Configuración de Git'
+description: 'Configuración Inicial de Git'
+date: '2024-08-17'
+banner: '/assets/images/git-logo.svg'
+category: 'Git & GitHub'
+colors: ['#FFFFFF', '#132362']
+tags: ['VCS', 'Control de Versiones', 'Git', 'GitHub']
+anterior: '/blog/GitAndGitHub1'
+siguiente: '/blog/github-first_repo'
+---
+
+**[Descargar Git](https://git-scm.com/downloads)**
+
+Es importante tener instalado Git en tu computadora para poder utilizarlo.
+Apenas lo tenemos instalado debemos buscar la terminal para realizar las configuraciones necesarias para poder
+comenzar a usar realmente Git.
+
+En Windows podemos utilizar `Git Bash`, en linux y en Mac la `terminal de comandos`.
+
+Desde un principio es necesario identificarse con Git, para ello debemos configurar nuestro nombre de usuario y
+nuestro correo electrónico, esto es importante, ya que cada confirmación de cambios que realicemos en Git contendrá
+información sobre quién realizó cambios en el código.
+
+Aquí te listo los comandos necesarios para realizar la configuración inicial de Git.
+
+- **El primer paso es configurar el nombre de usuario.**
+
+```bash
+  # Configurar el nombre de usuario
+  git config --global user.name "Nombre de Usuario"
+```
+
+- **El segundo paso es configurar el correo electrónico.**
+
+```bash
+  # Configurar el correo electrónico
+  git config --global user.email correo@correo.com
+```
+
+- **Recomiendo cambiar la rama principal de `master` a `main`.**
+
+```bash
+  # Cambiar el nombre de la rama principal
+  git config --global init.defaultBranch main
+```
+
+- **Verificar la configuración realizada.**
+
+```bash
+  # Verificar la configuración realizada
+  git config --list
+```
+
+Con esta configuración inicial ya podemos comenzar a utilizar Git en nuestro proyecto.
+
