@@ -1,9 +1,10 @@
-// src/app/blog/[slug]/page.tsx
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import Image from 'next/image';
+import Link from 'next/link';
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import styles from '../Blog.module.css';
 import { ArticleContent } from './ClientContent';
 
@@ -38,10 +39,20 @@ const ArticlePage = async ({ params }: Params) => {
     className={styles.category}
     style={{
      color: frontMatter?.colors[0],
-     backgroundColor: frontMatter?.colors[1],
     }}
    >
-    {frontMatter?.category}
+    {/*@ts-ignore*/}
+    {frontMatter?.tags.map((tag) => (
+     <span
+      key={tag}
+      className={styles.tag}
+      style={{
+       backgroundColor: frontMatter?.colors[1],
+      }}
+     >
+      {tag}
+     </span>
+    ))}
    </p>
    <div className={styles.articleHead}>
     <time dateTime={date} className={styles.date}>
@@ -59,6 +70,24 @@ const ArticlePage = async ({ params }: Params) => {
     />
    </picture>
    <ArticleContent mdxSource={mdxSource} />
+   <div className={styles.articlesDirections}>
+    <div className={styles.previousLinkContainer}>
+     {frontMatter.anterior && (
+      <Link href={frontMatter.anterior} className={styles.directionLink}>
+       <FaLongArrowAltLeft />
+       <span>Anterior artículo</span>
+      </Link>
+     )}
+    </div>
+    <div className={styles.nextLinkContainer}>
+     {frontMatter.siguiente && (
+      <Link href={frontMatter.siguiente} className={styles.directionLink}>
+       <span>Siguiente artículo</span>
+       <FaLongArrowAltRight />
+      </Link>
+     )}
+    </div>
+   </div>
   </article>
  );
 };

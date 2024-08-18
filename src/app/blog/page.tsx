@@ -39,8 +39,8 @@ const BlogPage = () => {
     )}
     onFilterChange={handleFilterChange}
    />
-   {filteredArticles.map(({ slug, frontMatter, date }: ArticleProps) => (
-    <BlogCard frontMatter={frontMatter} date={date} slug={slug} key={slug} />
+   {filteredArticles.map(({ slug, frontMatter }: ArticleProps) => (
+    <BlogCard frontMatter={frontMatter} slug={slug} key={slug} />
    ))}
   </>
  );

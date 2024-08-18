@@ -10,7 +10,7 @@ export interface FrontMatter {
 
 export interface ArticleProps {
  content?: string;
- date: string;
+ date?: string;
  frontMatter: FrontMatter;
  shortDescription?: string;
  slug: string;

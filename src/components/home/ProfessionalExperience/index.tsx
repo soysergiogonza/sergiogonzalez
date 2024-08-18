@@ -10,7 +10,7 @@ export const ProfessionalExperience = () => {
     Professional Experience
    </h2>
    <ul className={styles.timeline}>
-    {experience.map((project, index) => (
+    {experience.map((project) => (
      <li className={styles.timelineEvent}>
       <picture className={styles.companyImage}>
        <Image
