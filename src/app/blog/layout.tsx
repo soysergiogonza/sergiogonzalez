@@ -1,3 +1,4 @@
+import { Aside } from '@/components/Aside';
 import { Provider } from '@/store';
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
@@ -18,7 +19,10 @@ const LayoutBlog = async ({
 }>) => {
  return (
   <Provider>
-   <main className={styles.main}>{children}</main>
+   <main className={styles.main}>
+    <Aside />
+    {children}
+   </main>
   </Provider>
  );
 };

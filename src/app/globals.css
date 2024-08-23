@@ -9,7 +9,8 @@
 
   --transition: all .3s ease-in;
 
-  --background-color: rgb(16, 16, 32);
+  --background-color: rgb(3, 7, 18);
+  --aside-color: rgb(17, 24, 39);
   --global-color: #FFFFFF;
 
   --titles-special: #91CEC2;

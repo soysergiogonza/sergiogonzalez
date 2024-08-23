@@ -1,29 +1,41 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import styles from './FilterHeader.module.css';
 
 interface FilterHeaderProps {
  categories: string[];
- onFilterChange: (selectedCategory: string | null) => void;
 }
 
-export const FilterHeader = ({
- categories,
- onFilterChange,
-}: FilterHeaderProps) => {
+export const FilterHeader = ({ categories }: FilterHeaderProps) => {
  const [selectedCategory, setSelectedCategory] = useState<string | null>('All');
 
  const handleFilterChange = (category: string | null) => {
   setSelectedCategory(category);
-  onFilterChange(category);
  };
+
+ const handleCategoryClick = useCallback(
+  (category: string) => {
+   handleFilterChange(category === 'All' ? null : category);
+  },
+  [handleFilterChange],
+ );
+ //
+ // const handleFilterChange = (category: string | null) => {
+ //  setSelectedCategory(category);
+ //  onFilterChange(category);
+ // };
+ //
+ // const handleFilterChange = (category: string) => {
+ //  setSelectedCategory(category);
+ //  onFilterChange(category === 'All' ? null : category);
+ // };
 
  return (
   <div className={styles.filterHeader}>
    <button
     className={`${styles.filterButton} ${selectedCategory === 'All' ? styles.active : ''}`}
-    onClick={() => handleFilterChange('All')}
+    onClick={() => handleCategoryClick('All')}
    >
     All
    </button>
