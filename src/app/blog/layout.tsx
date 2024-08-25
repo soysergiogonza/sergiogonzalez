@@ -17,14 +17,7 @@ const LayoutBlog = async ({
 }: Readonly<{
  children: ReactNode;
 }>) => {
- return (
-  <Provider>
-   <main className={styles.main}>
-    <Aside />
-    {children}
-   </main>
-  </Provider>
- );
+ return <>{children}</>;
 };
 
 export default LayoutBlog;

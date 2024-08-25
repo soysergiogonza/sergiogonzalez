@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Aside } from '@/components/Aside';
 import { Header } from '@/components/Header';
-import { ClientLayout } from '@/components/layout/ClientLayout';
+import { Provider } from '@/store';
 import { Inter } from '@/utils/utils';
 import { ReactNode } from 'react';
 
@@ -21,8 +22,13 @@ const RootLayout = ({
  return (
   <html lang='es'>
    <body className={Inter.className} suppressHydrationWarning={true}>
-    <Header />
-    <main>{children}</main>
+    <Provider>
+     <Aside />
+     <main className='content'>
+      <Header />
+      {children}
+     </main>
+    </Provider>
    </body>
   </html>
  );

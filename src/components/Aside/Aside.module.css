@@ -1,9 +1,18 @@
-.MainContainer {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
+.aside {
+    background: var(--aside-color);
+
+    .logo {
+        width: 100%;
+        display: block;;
+        height: 5rem;
+        padding-inline-start: 2rem;
+    }
+
+    .separator {
+        border-block-end: 2px solid rgba(255, 255, 255, 0.1);
+    }
 }
+
 .title {
     font-size: 3rem;
     display: grid;
@@ -11,10 +20,8 @@
 }
 
 .sidebar {
-    background: var(--aside-color);
     color: white;
-    height: 100vh;
-    overflow-y: auto;
+    padding-inline: 1rem;
 }
 
 .TopSection {
@@ -22,11 +29,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 10px;
-}
-
-.logo {
-    font-size: 18px;
-    line-height: 0;
 }
 
 .bars {
