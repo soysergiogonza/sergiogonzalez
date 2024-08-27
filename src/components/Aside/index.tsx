@@ -15,7 +15,7 @@ export const Aside = () => {
  const categories = useMemo(() => {
   return Array.from(
    new Set(
-    articles.flatMap(({ frontMatter }: ArticleProps) => frontMatter.category),
+    articles.flatMap(({ frontMatter }: ArticleProps) => frontMatter?.category),
    ),
   );
  }, [articles]);
@@ -24,10 +24,21 @@ export const Aside = () => {
   <aside className={styles.aside}>
    <picture className={styles.logo}>
     <Link href='/'>
-     <Image src={Logo} alt='logo' width={100} height={100} priority />
+     <Image
+      src={Logo}
+      alt='logo'
+      width={100}
+      height={100}
+      priority
+      style={{
+       width: 'auto',
+       height: 'auto',
+      }}
+     />
     </Link>
    </picture>
    <div className={styles.sidebar}>
+    {/* @ts-ignore*/}
     <Categories categories={categories} articles={articles} />
    </div>
   </aside>
