@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import styles from '../Blog.module.css';
 import { ArticleContent } from './ClientContent';
@@ -21,6 +22,11 @@ const ArticlePage = async ({ params }: Params) => {
   'src/data/blog',
   `${slug}.mdx`,
  );
+
+ if (!fs.existsSync(filePath)) {
+  notFound();
+ }
+
  const markdownWithMeta: string = fs.readFileSync(filePath, 'utf-8');
  const { data: frontMatter, content } = matter(markdownWithMeta);
  const mdxSource = await serialize(content);

@@ -1,6 +1,6 @@
 export interface FrontMatter {
  banner: string;
- category: string[];
+ category?: string[];
  colors: string;
  date: string;
  description: string;
@@ -11,7 +11,7 @@ export interface FrontMatter {
 export interface ArticleProps {
  content?: string;
  date?: string;
- frontMatter: FrontMatter;
+ frontMatter?: FrontMatter | undefined;
  shortDescription?: string;
- slug: string;
+ slug?: string;
 }

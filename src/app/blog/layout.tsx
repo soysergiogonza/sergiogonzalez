@@ -1,7 +1,5 @@
-import { Provider } from '@/store';
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
-import styles from './Blog.module.css';
 
 export const metadata: Metadata = {
  title: 'Blog',
@@ -16,11 +14,7 @@ const LayoutBlog = async ({
 }: Readonly<{
  children: ReactNode;
 }>) => {
- return (
-  <Provider>
-   <main className={styles.main}>{children}</main>
-  </Provider>
- );
+ return <>{children}</>;
 };
 
 export default LayoutBlog;
