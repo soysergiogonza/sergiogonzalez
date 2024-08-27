@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -29,7 +28,9 @@ const ArticlePage = async ({ params }: Params) => {
 
  const markdownWithMeta: string = fs.readFileSync(filePath, 'utf-8');
  const { data: frontMatter, content } = matter(markdownWithMeta);
- const mdxSource = await serialize(content);
+ const mdxSource = await (await import('next-mdx-remote/serialize')).serialize(
+  content,
+ );
 
  const date: string = new Date(frontMatter.date)
   .toLocaleDateString('es-CO', {
@@ -103,6 +104,6 @@ export default ArticlePage;
 export const generateStaticParams = async () => {
  const files = fs.readdirSync(path.join(process.cwd(), 'src/data/blog'));
  return files.map((filename) => ({
-  params: { slug: filename.replace('.mdx', '') },
+  params: { slug: filename.replace('.mdx', '.mdx') },
  }));
 };
