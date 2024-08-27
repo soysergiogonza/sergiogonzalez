@@ -27,7 +27,6 @@ export const Aside = () => {
      <Image src={Logo} alt='logo' width={100} height={100} priority />
     </Link>
    </picture>
-   <div className={styles.separator}></div>
    <div className={styles.sidebar}>
     <Categories categories={categories} articles={articles} />
    </div>

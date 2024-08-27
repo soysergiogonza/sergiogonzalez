@@ -1,15 +1,15 @@
 .main {
-    padding-inline: 1.5rem;
     max-width: 100ch;
     margin: 0 auto;
     color: white;
+    border: 1px solid #EA580C;
 }
 
 .article {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding-block-end: 4rem;
+    padding: 4rem;
     font-size: 1rem;
     line-height: 1.5rem;
 
@@ -144,9 +144,5 @@
         object-fit: contain;
         border-radius: .3rem;
     }
-
-}
-
-.articlesDirections {
 
 }
