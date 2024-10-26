@@ -16,16 +16,16 @@ export const Categories = ({ categories, articles }: CategoriesProps) => {
           <div>{category}</div>
           <div className={styles.articleList}>
             {articles
-              .filter(
-                // @ts-ignore
-                ({ frontMatter }: ArticleProps) =>
-                  frontMatter?.category === category,
+              .filter(({ frontMatter }: ArticleProps) =>
+                frontMatter?.category?.includes(category),
               )
               .map(({ slug, frontMatter }: ArticleProps) => (
-                <Link href={`/blog/${slug}`} key={slug}>
-                  <div key={slug} className={styles.articleTitle}>
-                    {frontMatter?.title}
-                  </div>
+                <Link
+                  href={`/blog/${slug}`}
+                  key={slug}
+                  className={styles.articleTitle}
+                >
+                  {frontMatter?.title}
                 </Link>
               ))}
           </div>
