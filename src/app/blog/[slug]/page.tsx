@@ -71,20 +71,24 @@ const ArticlePage = async ({ params }: Params) => {
                     />
                 </picture>
                 <MDXRemote
-                    source={content}
-                    components={{
-                        // Tus componentes personalizados aquí
-                        img: (props) => (
-                            <Image
-                                {...props}
-                                width={500}
-                                height={300}
-                                className={styles.mdxImage}
-                            />
-                        ),
-                        // Otros componentes personalizados...
-                    }}
-                />
+  source={content}
+  components={{
+    img: ({ src, alt, ...props }: { src?: string; alt?: string }) => {
+      if (!src) return null; // O maneja el caso cuando no hay src
+
+      return (
+        <Image
+          src={src}
+          alt={alt || 'Imagen'}
+          width={500}
+          height={300}
+          className={styles.mdxImage}
+          {...props}
+        />
+      );
+    }
+  }}
+/>
                 <div className={styles.articlesDirections}>
                     <div className={styles.previousLinkContainer}>
                         {frontMatter.anterior && (
