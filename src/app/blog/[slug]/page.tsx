@@ -73,6 +73,7 @@ const ArticlePage = async ({ params }: Params) => {
      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
      width={500}
      height={500}
+     priority
     />
    </picture>
    <ArticleContent mdxSource={mdxSource} />
