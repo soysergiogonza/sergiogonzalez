@@ -1,9 +1,9 @@
 'use client';
 
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 export const ArticleContent = ({
- mdxSource,
+  mdxSource,
 }: { mdxSource: MDXRemoteSerializeResult }) => {
- return <MDXRemote {...mdxSource} />;
+  return <MDXRemote {...mdxSource} />;
 };

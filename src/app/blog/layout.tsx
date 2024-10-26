@@ -1,20 +1,20 @@
 import type { Metadata } from 'next';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
- title: 'Blog',
- description: 'Frontend Developer',
- icons: {
-  icon: 'assets/icons/favicon.svg',
- },
+  title: 'Blog',
+  description: 'Frontend Developer',
+  icons: {
+    icon: 'assets/icons/favicon.svg',
+  },
 };
 
 const LayoutBlog = async ({
- children,
+  children,
 }: Readonly<{
- children: ReactNode;
+  children: ReactNode;
 }>) => {
- return <>{children}</>;
+  return <>{children}</>;
 };
 
 export default LayoutBlog;

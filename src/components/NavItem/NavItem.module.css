@@ -1,17 +1,17 @@
 .link {
- padding-block: 0.5rem;
- padding-inline: 1.5rem;
- border-radius: var(--rounded-full);
- margin-block: 0.25rem;
- transition: var(--transition);
- width: fit-content;
+  padding-block: 0.5rem;
+  padding-inline: 1.5rem;
+  border-radius: var(--rounded-full);
+  margin-block: 0.25rem;
+  transition: var(--transition);
+  width: fit-content;
 }
 
 .active {
- background: var(--primary-color);
- transition: var(--transition);
+  background: var(--primary-color);
+  transition: var(--transition);
 }
 
 .link:not(.active):hover {
- background-color: var(--primary-color__opacity);
+  background-color: var(--primary-color__opacity);
 }
