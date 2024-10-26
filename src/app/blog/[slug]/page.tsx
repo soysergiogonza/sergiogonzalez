@@ -19,7 +19,7 @@ const ArticlePage = async ({ params }: Params) => {
  const { slug } = params;
  const filePath: string = path.join(
   process.cwd(),
-  'src/data/blog',
+  'src/data/blog/',
   `${slug}.mdx`,
  );
 
@@ -102,7 +102,7 @@ const ArticlePage = async ({ params }: Params) => {
 export default ArticlePage;
 
 export const generateStaticParams = async () => {
- const files = fs.readdirSync(path.join(process.cwd(), 'src/data/blog'));
+ const files = fs.readdirSync(path.join(process.cwd(), 'src/data/blog/'));
  return files.map((filename) => ({
   params: { slug: filename.replace('.mdx', '') },
  }));
