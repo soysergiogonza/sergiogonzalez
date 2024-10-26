@@ -34,7 +34,7 @@ export const getArticles = async () => {
                })
                .toUpperCase();
 
-           return {
+           return <ArticleProps> {
             frontMatter,
             date,
             content,
