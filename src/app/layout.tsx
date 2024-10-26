@@ -4,6 +4,7 @@ import { Aside } from '@/components/Aside';
 import { Header } from '@/components/Header';
 import { Inter } from '@/utils/utils';
 import { ReactNode } from 'react';
+import { Provider } from '@/store/Provider';
 
 export const metadata: Metadata = {
  title: 'Sergio González Sánchez',
@@ -21,11 +22,13 @@ const RootLayout = ({
  return (
   <html lang='es'>
    <body className={Inter.className} suppressHydrationWarning={true}>
+   <Provider>
      <Aside />
      <main className='content'>
       <Header />
          {children}
      </main>
+   </Provider>
    </body>
   </html>
  );
