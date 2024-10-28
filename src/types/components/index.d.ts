@@ -1,14 +1,14 @@
-import type { NavItemProps } from '../navigation';
+import type { NavItemProps } from "../navigation";
 
 export interface HeaderProps {
-  className?: string;
+	className?: string;
 }
 
 export interface LogoProps {
-  width?: number;
-  height?: number;
+	width?: number;
+	height?: number;
 }
 
 export interface NavigationComponentProps {
-  pages: NavItemProps[];
+	pages: NavItemProps[];
 }

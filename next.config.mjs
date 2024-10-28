@@ -1,11 +1,6 @@
-import withMDX from '@next/mdx';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
-  experimental: {
-    mdxRs: true,
-  },
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   images: {
     domains: [
       // Agrega aquí los dominios de tus imágenes si las tienes en CDN
@@ -13,11 +8,4 @@ const nextConfig = {
   },
 };
 
-export default withMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-    providerImportSource: '@mdx-js/react',
-  },
-})(nextConfig);
+export default nextConfig;

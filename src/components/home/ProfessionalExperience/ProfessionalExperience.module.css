@@ -1,62 +1,62 @@
 .timeline {
-  margin: 4em auto;
+	margin: 4em auto;
 
-  .timelineEvent {
-    display: flex;
+	.timelineEvent {
+		display: flex;
 
-    .companyImage {
-      background-color: var(--background-color);
-      margin: 0.5em 0.5em 0.5em -0.5em;
-    }
-    .companyImage {
-      width: 100px;
-      height: 100px;
-      padding: 0.5rem;
+		.companyImage {
+			background-color: var(--background-color);
+			margin: 0.5em 0.5em 0.5em -0.5em;
+		}
+		.companyImage {
+			width: 100px;
+			height: 100px;
+			padding: 0.5rem;
 
-      .image {
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-      }
-    }
+			.image {
+				width: 100%;
+				height: 100%;
+				object-fit: fill;
+			}
+		}
 
-    .timelineEventCopy {
-      padding-block-end: 2em;
-      position: relative;
-      width: 100%;
-      max-width: 100ch;
+		.timelineEventCopy {
+			padding-block-end: 2em;
+			position: relative;
+			width: 100%;
+			max-width: 100ch;
 
-      @media (min-width: 768px) {
-        left: 4em;
-        font-size: 1.5em;
-      }
+			@media (min-width: 768px) {
+				left: 4em;
+				font-size: 1.5em;
+			}
 
-      .titleExperienceItem {
-        transition: var(--transition);
-        font-size: 1em;
-        font-weight: bold;
-        padding: 0.25em 1em;
-        background-color: var(--titles-special);
-        width: fit-content;
-        margin-block-end: 1rem;
-      }
+			.titleExperienceItem {
+				transition: var(--transition);
+				font-size: 1em;
+				font-weight: bold;
+				padding: 0.25em 1em;
+				background-color: var(--titles-special);
+				width: fit-content;
+				margin-block-end: 1rem;
+			}
 
-      .bodyExperienceItem {
-        .companyDetails {
-          display: flex;
-          gap: 10rem;
-          color: var(--span-subDescription);
-        }
-        .date {
-          color: var(--span-subDescription);
-        }
-      }
-    }
-  }
+			.bodyExperienceItem {
+				.companyDetails {
+					display: flex;
+					gap: 10rem;
+					color: var(--span-subDescription);
+				}
+				.date {
+					color: var(--span-subDescription);
+				}
+			}
+		}
+	}
 }
 
 .sectionTitle {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--titles-special);
+	font-size: 2rem;
+	font-weight: bold;
+	color: var(--titles-special);
 }
