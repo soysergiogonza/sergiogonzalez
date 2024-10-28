@@ -117,7 +117,7 @@
       text-align: center;
 
       &::before {
-        content: "Fecha de publicación";
+        content: "Fecha de Actualización: ";
         color: #ea580c;
         font-weight: normal;
         margin-right: 5px;
@@ -140,5 +140,37 @@
     height: 100%;
     object-fit: contain;
     border-radius: .3rem;
+  }
+}
+
+.container {
+  min-height: 100vh;
+  background-color: var(--background-color);
+
+  .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 0;
+
+    @media (min-width: 1024px) {
+      gap: 4rem;
+      flex-direction: row;
+    }
+  }
+
+  .main {
+    width: 100%;
+
+    @media (min-width: 1024px) {
+      flex: 1;
+      min-width: 0;
+    }
   }
 }

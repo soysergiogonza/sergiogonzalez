@@ -1,23 +1,12 @@
-import type { CSSProperties } from 'react';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { NavItemProps } from '@/types/navigation';
 
 import styles from './NavItem.module.css';
+import { useActiveRoute } from '@/hooks/useActiveRoute';
 
-interface Props {
-  name: string;
-  url: string;
-  style?: CSSProperties;
-}
-
-export const NavItem = ({ name, url }: Props) => {
-  const pathname = usePathname();
-  let isActive;
-
-  url === '/'
-    ? (isActive = pathname === url)
-    : (isActive = pathname.includes(url));
+export const NavItem = ({ name, url }: NavItemProps) => {
+  const { isActive } = useActiveRoute(url);
 
   return (
     <Link href={url} className={`${styles.link} ${isActive && styles.active}`}>

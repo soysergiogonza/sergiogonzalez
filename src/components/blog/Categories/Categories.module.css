@@ -1,0 +1,57 @@
+.routes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .details {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+
+    &[open] {
+      border: 1px solid #035707;
+      backdrop-filter: blur(5px);
+      background: rgba(0, 255, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(68, 190, 116, 0.2);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      transition: all 0.3s ease;
+
+      .summary {
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #035707;
+      }
+    }
+
+    .summary {
+      cursor: pointer;
+      font-weight: 500;
+
+      .categoryTitle {
+        display: inline-block;
+      }
+    }
+
+    .articleList {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding-left: 1rem;
+      margin-top: 0.5rem;
+
+      .articleTitle {
+        font-size: 0.875rem;
+        overflow-wrap: break-word;
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}

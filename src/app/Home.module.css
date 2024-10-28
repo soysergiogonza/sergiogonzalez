@@ -72,6 +72,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
+      list-style: none;
 
       .skill {
         background-color: var(--primary-color);

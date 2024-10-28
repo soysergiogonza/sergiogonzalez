@@ -38,8 +38,8 @@ body {
 body {
   background: var(--background-color);
   color: rgb(156 163 175);
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  /*display: grid;*/
+  /*grid-template-columns: repeat(12, 1fr);*/
   grid-template-rows: 100dvh;
 }
 
@@ -55,9 +55,6 @@ a {
 }
 
 .content {
-  grid-column: 3 / span 12;
-  overflow: scroll;
-
   @media (min-width: 500px) {
     grid-column: 3 / span 12;
   }

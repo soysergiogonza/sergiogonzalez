@@ -1,65 +1,20 @@
 .header {
-  display: grid;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 5rem;
   max-height: 5rem;
   color: #fff;
   width: 100%;
   padding-inline: 2rem;
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 3;
   border-block-end: 2px solid rgba(255, 255, 255, 0.1);
 
-  @media (min-width: 768px) {
+  @media (width <= 768px) {
     padding-inline-end: 1rem;
   }
-}
-
-.nav {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.navList {
-  background-color: var(--bg-grey);
-  border-radius: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-inline: calc(1rem - .7rem);
-  position: absolute;
-  top: 5rem;
-  right: 1rem;
-  width: 12.5rem;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    top: inherit;
-    width: auto;
-    border-radius: 2rem;
-    position: relative;
-  }
-}
-
-.darkModeButton {
-  margin-left: 20px;
-  padding: 8px;
-  background: none;
-  border: 1px solid #555;
-  border-radius: 50%;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.darkModeButton:hover,
-.darkModeButton:focus {
-  background-color: #555;
-}
-.icon {
-  @media (min-width: 768px) {
-    display: none;
+  .icon {
+    @media (width >= 768px) {
+      display: none;
+    }
   }
 }

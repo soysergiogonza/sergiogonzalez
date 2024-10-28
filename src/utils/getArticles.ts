@@ -5,18 +5,14 @@ import type { ArticleProps } from '@/types/blog';
 
 export const getArticles = async () => {
   try {
-    // Definimos la ruta del directorio de blog de manera más robusta
     const blogDirectory = path.join(process.cwd(), 'src/data/blog');
 
-    // Leemos el directorio de manera asíncrona
     const files = await fs.readdir(blogDirectory);
 
-    // Procesamos los archivos de manera asíncrona
     const articles = await Promise.all(
       files
         .filter((filename) => filename.endsWith('.mdx'))
         .map(async (filename): Promise<ArticleProps> => {
-          // Leemos el archivo de manera asíncrona
           const markdownWithMeta = await fs.readFile(
             path.join(blogDirectory, filename),
             'utf-8',
@@ -47,6 +43,6 @@ export const getArticles = async () => {
     return articles;
   } catch (error) {
     console.error('Error reading blog articles:', error);
-    throw error; // Re-lanzamos el error para manejarlo en la API
+    throw error;
   }
 };

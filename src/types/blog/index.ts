@@ -6,12 +6,25 @@ export interface FrontMatter {
   description: string;
   tags: string[];
   title: string;
+  position?: number;
 }
 
 export interface ArticleProps {
   content?: string;
   date?: string;
-  frontMatter?: FrontMatter | undefined;
   shortDescription?: string;
+  frontMatter?: FrontMatter | undefined;
   slug?: string;
+  [key: string]: any;
+}
+
+export interface CategoriesProps {
+  categories: string[];
+  articles: ArticleProps[];
+}
+
+export interface ArticleBlogParams {
+  params: {
+    slug: string;
+  };
 }
