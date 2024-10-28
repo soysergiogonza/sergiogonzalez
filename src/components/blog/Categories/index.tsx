@@ -18,12 +18,8 @@ export const Categories = () => {
                 .filter(({ frontMatter }: ArticleProps) =>
                   frontMatter?.category?.includes(category),
                 )
-                .sort(
-                  (a, b) =>
-                    (a?.frontMatter?.position || 0) -
-                    (b?.frontMatter?.position || 0),
-                )
-                .map(({ slug, frontMatter }: ArticleProps) => (
+                  .sort((a, b) => (a?.frontMatter?.position || 0) - (b?.frontMatter?.position || 0))
+                  .map(({ slug, frontMatter }: ArticleProps) => (
                   <Link
                     href={`/blog/${slug}`}
                     key={slug}
