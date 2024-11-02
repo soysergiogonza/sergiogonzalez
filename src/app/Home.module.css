@@ -1,92 +1,92 @@
 .main {
-	max-width: 120ch;
-	margin: 2rem auto;
-	padding-inline: 2rem;
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-	min-inline-size: 0;
+  max-width: 120ch;
+  margin: 2rem auto;
+  padding-inline: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-inline-size: 0;
 
-	.header {
-		display: flex;
-		justify-content: space-between;
-		flex-direction: column;
-		gap: 1rem;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
 
-		@media (min-width: 768px) {
-			flex-direction: row;
-			align-items: center;
-		}
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+    }
 
-		.title {
-			font-size: 3rem;
-			font-weight: bold;
+    .title {
+      font-size: 3rem;
+      font-weight: bold;
 
-			.professionalTitle {
-				font-size: 1.5rem;
-				font-weight: normal;
-				color: var(--span-subDescription);
-			}
-		}
+      .professionalTitle {
+        font-size: 1.5rem;
+        font-weight: normal;
+        color: var(--span-subDescription);
+      }
+    }
 
-		.callToActionButton {
-			background-color: var(--primary-color);
-			padding: .75rem 1rem;
-			border-radius: 0.75rem;
-			font-weight: bold;
-			font-size: 1rem;
-			cursor: pointer;
-			height: fit-content;
-			width: fit-content;
-		}
-	}
-	.about {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-		font-size: 1.2rem;
+    .callToActionButton {
+      background-color: var(--primary-color);
+      padding: .75rem 1rem;
+      border-radius: 0.75rem;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      height: fit-content;
+      width: fit-content;
+    }
+  }
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-size: 1.2rem;
 
-		.aboutDescription {
-			font-size: 1rem;
-			display: flex;
-			flex-direction: column;
-			gap: 1rem;
+    .aboutDescription {
+      font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
 
-			.paragraph {
-				text-wrap: pretty;
-			}
+      .paragraph {
+        text-wrap: pretty;
+      }
 
-			@media (min-width: 768px) {
-				font-size: 1.5rem;
-			}
-		}
-	}
+      @media (min-width: 768px) {
+        font-size: 1.5rem;
+      }
+    }
+  }
 
-	.skills {
-		font-size: 1.5rem;
-		display: flex;
-		flex-direction: column;
-		gap: .75rem;
+  .skills {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
 
-		.skillsList {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 1rem;
-			list-style: none;
+    .skillsList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      list-style: none;
 
-			.skill {
-				background-color: var(--primary-color);
-				padding: .2rem 1rem;
-				border-radius: 0.5rem;
-				font-size: 1rem;
-				font-weight: 700;
-			}
-		}
-	}
+      .skill {
+        background-color: var(--primary-color);
+        padding: .2rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+    }
+  }
 }
 
 .sectionTitle {
-	font-size: 2rem;
-	font-weight: bold;
-	color: var(--titles-special);
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--titles-special);
 }

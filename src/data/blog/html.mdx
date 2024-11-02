@@ -3,7 +3,7 @@ title: 'HTML'
 description: 'Hyper Text Markup Language'
 date: '2024-06-01'
 banner: '/assets/images/cover-HTML.png'
-category: 'Desarrollo de Software'
+category: 'HTML'
 colors: ['#FFFFFF', '#E44D26']
 tags: ['HTML']
 ---
@@ -34,7 +34,7 @@ En este enlace puedes descargar un CheatSheet de HTML [HTML CheatSheet](https://
 En `HMTL`, la mayoría de los elementos se representan mediante una etiqueta de apertura y una de cierre, en el medio
 de ambas etiquetas se encuentra el contenido del elemento.
 
-```html
+```html showLineNumbers
 <etiqueta>Contenido</etiqueta>
 ```
 
@@ -45,7 +45,7 @@ de ambas etiquetas se encuentra el contenido del elemento.
 Esta etiqueta indica el comienzo de un elemento `HTML` y su tipo; se escribe entre corchetes angulares.\
 La siguiente es una etiqueta de apertura de tipo párrafo.
 
-```html
+```html showLineNumbers
 <p></p>
 ```
 
@@ -54,7 +54,7 @@ La siguiente es una etiqueta de apertura de tipo párrafo.
 Es el texto o los elementos anidados que se encuentran entre las etiquetas de apertura y cierre.
 Es importante que se **destaque** que dentro del contenido de una etiqueta, se pueden anidar otras etiquetas.
 
-```html
+```html showLineNumbers
 <p>
 	<span>Esto es una etiqueta `span` anidada dentro de un párrafo</span>
 </p>
@@ -66,7 +66,7 @@ Esta etiqueta indica el final de un elemento `HTML` y su tipo; se escribe entre 
 incluye una barra inclinada antes del nombre del elemento.
 La siguiente es una etiqueta de cierre de tipo párrafo.
 
-```html
+```html showLineNumbers
 </p>
 ```
 
@@ -80,7 +80,7 @@ vacío.
 Este `slash` es opcional en `HTML`, pero es recomendable agregarlo porque en algunas librerías como `React`
 es obligatorio su uso y también nos ayuda a mantener un código limpio y legible.
 
-```html
+```html showLineNumbers
 <img src="ruta-de-la-imagen.jpg" alt="Texto alternativo" />
 ```
 
@@ -114,7 +114,7 @@ sobre el elemento.
 
 ## Anatomía de un documento HTML
 
-```html
+```html showLineNumbers
 <!doctype html>
 <html lang="es">
 	<head>
@@ -163,13 +163,13 @@ Este elemento envuelve todo el contenido de la página, es la raíz de un docume
 Todos los demás elementos deben ser descendientes de este elemento `<html>`.
 También tiene un atributo `lang` que se utiliza para especificar el idioma del contenido de la página.
 
-```html
+```html showLineNumbers
 <html lang="es"></html>
 ```
 
 ### Head
 
-```html
+```html showLineNumbers
 <head>
 	<meta charset="UTF-8" />
 	<meta
@@ -188,7 +188,7 @@ Dentro del elemento `<head>` podemos encontrar los siguientes elementos:
 
 #### `<meta />`
 
-```html
+```html showLineNumbers
 <meta charset="UTF-8" />
 ```
 
@@ -200,7 +200,7 @@ Dentro del elemento `<head>` podemos encontrar los siguientes elementos:
 
 #### `<title>`
 
-```html
+```html showLineNumbers
 <title>Título del Documento</title>
 ```
 
@@ -210,7 +210,7 @@ También se utiliza para proporcionar un título a la página cuando se agrega a
 
 #### `<link>`
 
-```html
+```html showLineNumbers
 <link rel="stylesheet" href="ruta-del-archivo.css" />
 ```
 
@@ -219,7 +219,7 @@ ser a una hoja de estilos en el mismo proyecto o a una hoja de estilos en un dir
 
 #### `<script>`
 
-```html
+```html showLineNumbers
 <script src="ruta-del-archivo.js"></script>
 ```
 

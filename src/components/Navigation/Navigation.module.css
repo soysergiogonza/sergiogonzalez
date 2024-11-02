@@ -1,25 +1,25 @@
 .nav {
-	display: flex;
-	justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .navList {
-	background-color: var(--bg-grey);
-	border-radius: 1.5rem;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	padding-inline: calc(1rem - .7rem);
-	position: absolute;
-	top: 5rem;
-	right: 1rem;
-	width: 12.5rem;
+  background-color: var(--bg-grey);
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-inline: calc(1rem - .7rem);
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+  width: 12.5rem;
 
-	@media (min-width: 768px) {
-		flex-direction: row;
-		top: inherit;
-		width: auto;
-		border-radius: 2rem;
-		position: relative;
-	}
+  @media (min-width: 768px) {
+    flex-direction: row;
+    top: inherit;
+    width: auto;
+    border-radius: 2rem;
+    position: relative;
+  }
 }

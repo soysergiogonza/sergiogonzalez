@@ -1,86 +1,86 @@
 :root {
-	--max-width: 120ch;
-	--border-radius: 12px;
+  --max-width: 120ch;
+  --border-radius: 12px;
 
-	--rounded-full: 9999px;
+  --rounded-full: 9999px;
 
-	--primary-color: #ff6464;
-	--primary-color__opacity: rgba(255, 100, 100, 0.3);
+  --primary-color: #ff6464;
+  --primary-color__opacity: rgba(255, 100, 100, 0.3);
 
-	--transition: all .3s ease-in;
+  --transition: all .3s ease-in;
 
-	--background-color: rgb(17, 24, 39);
-	--aside-color: rgb(17, 24, 39);
-	--global-color: #ffffff;
+  --background-color: rgb(17, 24, 39);
+  --aside-color: rgb(17, 24, 39);
+  --global-color: #ffffff;
 
-	--titles-special: #91cec2;
-	--bg-grey: #293038;
-	--span-subDescription: #9eabb8;
+  --titles-special: #91cec2;
+  --bg-grey: #293038;
+  --span-subDescription: #9eabb8;
 }
 
 * {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 
-	&:after,
-	&:before {
-		box-sizing: border-box;
-	}
-	color: var(--global-color);
+  &:after,
+  &:before {
+    box-sizing: border-box;
+  }
+  color: var(--global-color);
 }
 
 html,
 body {
-	overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 body {
-	background: var(--background-color);
-	color: rgb(156 163 175);
-	grid-template-rows: 100dvh;
+  background: var(--background-color);
+  color: rgb(156 163 175);
+  grid-template-rows: 100dvh;
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 @media (prefers-color-scheme: dark) {
-	html {
-		color-scheme: dark;
-	}
+  html {
+    color-scheme: dark;
+  }
 }
 
 .content {
-	@media (min-width: 500px) {
-		grid-column: 3 / span 12;
-	}
+  @media (min-width: 500px) {
+    grid-column: 3 / span 12;
+  }
 
-	@media (min-width: 768px) {
-		grid-column: 5 / span 7;
-	}
+  @media (min-width: 768px) {
+    grid-column: 5 / span 7;
+  }
 
-	@media (min-width: 1024px) {
-		grid-column: 4 / span 10;
-	}
+  @media (min-width: 1024px) {
+    grid-column: 4 / span 10;
+  }
 }
 
 img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: .3rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: .3rem;
 }
 
 span {
-	strong {
-		color: inherit;
-		code {
-			color: inherit;
-		}
-	}
-	code {
-		color: inherit;
-	}
+  strong {
+    color: inherit;
+    code {
+      color: inherit;
+    }
+  }
+  code {
+    color: inherit;
+  }
 }

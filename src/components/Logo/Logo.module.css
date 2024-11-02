@@ -1,14 +1,14 @@
 .logo {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-	& img {
-		width: 4rem;
-		height: 4rem;
-	}
+  & img {
+    width: 4rem;
+    height: 4rem;
+  }
 
-	@media (width <= 1024px) {
-		justify-content: flex-start;
-	}
+  @media (width <= 1024px) {
+    justify-content: flex-start;
+  }
 }

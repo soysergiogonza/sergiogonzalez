@@ -1,12 +1,12 @@
 import { usePathname } from "next/navigation";
 
 export const useActiveRoute = (url: string) => {
-	const pathname = usePathname();
+  const pathname = usePathname();
 
-	const isActive = url === "/" ? pathname === url : pathname.includes(url);
+  const isActive = url === "/" ? pathname === url : pathname.includes(url);
 
-	return {
-		isActive,
-		activeClass: isActive ? "active" : "",
-	};
+  return {
+    isActive,
+    activeClass: isActive ? "active" : "",
+  };
 };

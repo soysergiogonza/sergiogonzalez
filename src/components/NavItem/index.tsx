@@ -6,11 +6,11 @@ import styles from "./NavItem.module.css";
 import { useActiveRoute } from "@/hooks/useActiveRoute";
 
 export const NavItem = ({ name, url }: NavItemProps) => {
-	const { isActive } = useActiveRoute(url);
+  const { isActive } = useActiveRoute(url);
 
-	return (
-		<Link href={url} className={`${styles.link} ${isActive && styles.active}`}>
-			{name}
-		</Link>
-	);
+  return (
+    <Link href={url} className={`${styles.link} ${isActive && styles.active}`}>
+      {name}
+    </Link>
+  );
 };
