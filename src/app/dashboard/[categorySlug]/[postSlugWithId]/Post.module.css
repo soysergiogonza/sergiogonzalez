@@ -1,0 +1,37 @@
+.container {
+  padding: 2rem;
+}
+
+.titleEdit {
+  margin-bottom: 1rem;
+}
+
+.titleInput {
+  font-size: 2rem;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.titleInput:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0,112,243,0.2);
+}
+
+.date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.container h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.container h1:hover {
+  color: #0070f3;
+} 

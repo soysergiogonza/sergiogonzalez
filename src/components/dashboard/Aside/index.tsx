@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { Plus, ChevronDown, ChevronRight, MoreVertical, FileText, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Plus, ChevronRight, MoreVertical, X } from 'lucide-react';
 import styles from './Aside.module.css';
+import { useCategories } from '@/hooks/dashboard/useCategories';
+import { usePosts } from '@/hooks/dashboard/usePosts';
+import { useRouter } from 'next/navigation';
+import { slugify } from '@/utils/slugify';
 
 type Category = {
   id: string;
@@ -12,55 +15,13 @@ type Category = {
 };
 
 export const Aside = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const router = useRouter();
+  const { categories, addCategory, updateCategory, deleteCategory } = useCategories();
+  const { posts, addPost, getPostsByCategory } = usePosts();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [newName, setNewName] = useState('');
-  const supabase = createClientComponentClient();
-
-  useEffect(() => {
-    loadCategories();
-  }, []);
-
-  const loadCategories = async () => {
-    const { data, error } = await supabase
-      .from('categories')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('Error al cargar categorías:', error);
-      return;
-    }
-
-    if (data) {
-      setCategories(data);
-    }
-  };
-
-  const handleAddCategory = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('categories')
-        .insert([
-          { name: 'Nueva Categoría', icon: '' }
-        ])
-        .select()
-        .single();
-
-      if (error) {
-        console.error('Error al crear categoría:', error);
-        return;
-      }
-
-      if (data) {
-        setCategories([data, ...categories]); // Añade la nueva categoría al inicio
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
 
   const handleMenuClick = (e: React.MouseEvent, categoryId: string) => {
     e.preventDefault();
@@ -79,79 +40,15 @@ export const Aside = () => {
 
   const handleSaveChanges = async () => {
     if (!editingCategory || !newName.trim()) return;
-
-    try {
-      let iconUrl = editingCategory.icon;
-      const fileInput = document.getElementById('icon-upload') as HTMLInputElement;
-      
-      if (fileInput?.files?.length) {
-        const file = fileInput.files[0];
-        // Generar un nombre único para el archivo
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}.${fileExt}`;
-        
-        const { data, error: uploadError } = await supabase.storage
-          .from('icons')
-          .upload(`${editingCategory.id}/${fileName}`, file, {
-            cacheControl: '3600',
-            upsert: true // Sobrescribir si existe
-          });
-
-        if (uploadError) throw uploadError;
-        
-        // Obtener la URL pública del icono
-        const { data: { publicUrl } } = supabase.storage
-          .from('icons')
-          .getPublicUrl(`${editingCategory.id}/${fileName}`);
-        
-        iconUrl = publicUrl;
-      }
-
-      // Actualizar la categoría con el nuevo nombre y/o icono
-      const { error } = await supabase
-        .from('categories')
-        .update({ 
-          name: newName.trim(),
-          icon: iconUrl 
-        })
-        .eq('id', editingCategory.id);
-
-      if (error) throw error;
-
-      // Actualizar el estado local
-      setCategories(categories.map(cat =>
-        cat.id === editingCategory.id 
-          ? { ...cat, name: newName.trim(), icon: iconUrl }
-          : cat
-      ));
-
+    
+    const fileInput = document.getElementById('icon-upload') as HTMLInputElement;
+    const iconFile = fileInput?.files?.[0];
+    
+    const success = await updateCategory(editingCategory.id, newName, iconFile);
+    
+    if (success) {
       setIsEditModalOpen(false);
       setEditingCategory(null);
-    } catch (error) {
-      console.error('Error al actualizar:', error);
-    }
-  };
-
-  const handleDeleteCategory = async (categoryId: string) => {
-    try {
-      // Primero eliminamos los archivos asociados del storage
-      await supabase.storage
-        .from('icons')
-        .remove([`${categoryId}`]);
-
-      // Luego eliminamos la categoría de la base de datos
-      const { error } = await supabase
-        .from('categories')
-        .delete()
-        .eq('id', categoryId);
-
-      if (error) throw error;
-
-      // Actualizamos el estado local
-      setCategories(categories.filter(cat => cat.id !== categoryId));
-      setActiveMenu(null);
-    } catch (error) {
-      console.error('Error al eliminar categoría:', error);
     }
   };
 
@@ -159,7 +56,24 @@ export const Aside = () => {
     e.preventDefault();
     e.stopPropagation();
     if (window.confirm('¿Estás seguro de que quieres eliminar esta categoría?')) {
-      await handleDeleteCategory(categoryId);
+      await deleteCategory(categoryId);
+      setActiveMenu(null);
+    }
+  };
+
+  const handleAddPost = async (e: React.MouseEvent, categoryId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const newPost = await addPost(categoryId);
+    if (newPost) {
+      const category = categories.find(cat => cat.id === categoryId);
+      if (category) {
+        const categorySlug = slugify(category.name);
+        const postSlug = slugify(newPost.title);
+        
+        router.push(`/dashboard/${categorySlug}/${postSlug}-${newPost.id}`);
+        router.refresh();
+      }
     }
   };
 
@@ -171,7 +85,7 @@ export const Aside = () => {
             <h3 className={styles.title}>Categorías</h3>
             <button 
               className={styles.addButton}
-              onClick={handleAddCategory}
+              onClick={addCategory}
             >
               <Plus size={16} />
             </button>
@@ -200,6 +114,13 @@ export const Aside = () => {
                   </div>
                   <div className={styles.categoryActions}>
                     <button 
+                      className={styles.addArticleButton}
+                      onClick={(e) => handleAddPost(e, category.id)}
+                      title="Agregar post"
+                    >
+                      <Plus size={16} />
+                    </button>
+                    <button 
                       className={styles.menuButton}
                       onClick={(e) => handleMenuClick(e, category.id)}
                     >
@@ -227,7 +148,21 @@ export const Aside = () => {
                   </div>
                 </summary>
                 <div className={styles.categoryContent}>
-                  {/* Aquí irían los artículos de la categoría */}
+                  {getPostsByCategory(category.id).map((post) => (
+                    <div 
+                      key={post.id} 
+                      className={styles.articleItem}
+                      onClick={() => {
+                        const categorySlug = slugify(category.name);
+                        const postSlug = slugify(post.title);
+                        
+                        router.push(`/dashboard/${categorySlug}/${postSlug}-${post.id}`);
+                        router.refresh();
+                      }}
+                    >
+                      {post.title}
+                    </div>
+                  ))}
                 </div>
               </details>
             ))}

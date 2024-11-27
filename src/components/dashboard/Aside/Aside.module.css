@@ -132,10 +132,9 @@
   }
   
   .categoryActions {
-    position: relative;
     display: flex;
+    gap: 4px;
     align-items: center;
-    gap: 0.25rem;
     opacity: 0;
     transition: opacity 0.2s ease;
   }
@@ -350,6 +349,41 @@
   }
   
   .closeButton:hover {
+    background-color: #2d2d2d;
+    color: #fff;
+  }
+  
+  .addArticleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #666;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .addArticleButton:hover {
+    background-color: #f0f0f0;
+    color: #000;
+  }
+  
+  .categoryContent {
+    padding-left: 24px;
+  }
+  
+  .articleItem {
+    padding: 8px 12px;
+    margin: 4px 0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .articleItem:hover {
     background-color: #2d2d2d;
     color: #fff;
   }
