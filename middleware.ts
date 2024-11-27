@@ -9,14 +9,18 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // Lista de rutas protegidas
-  const protectedRoutes = ["/prueba", "/admin", "/dashboard"];
+  // Ruta de login
+  if (req.nextUrl.pathname === "/login") {
+    if (session) {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+    return res;
+  }
 
-  // Verifica si la ruta actual está en la lista de rutas protegidas
-  if (protectedRoutes.includes(req.nextUrl.pathname)) {
+  // Proteger ruta dashboard
+  if (req.nextUrl.pathname.startsWith("/dashboard")) {
     if (!session) {
-      // Redirige al inicio si no hay sesión
-      return NextResponse.redirect(new URL("/", req.url));
+      return NextResponse.redirect(new URL("/login", req.url));
     }
   }
 
@@ -25,5 +29,5 @@ export async function middleware(req: NextRequest) {
 
 // Configura las rutas que deben ser manejadas por el middleware
 export const config = {
-  matcher: ["/prueba", "/admin", "/dashboard"],
+  matcher: ["/login", "/dashboard/:path*"],
 };
