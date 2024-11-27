@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase'
-import type { Category } from '@/types/categories'
+import type { Category } from '@/types/blog/categories'
 
 export const categoriesService = {
   async getAll() {
