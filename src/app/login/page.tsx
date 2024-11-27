@@ -14,21 +14,25 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
+    
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-      if (error) {
-        setError(error.message);
+      if (signInError) {
+        console.error('Error de autenticación:', signInError);
+        setError(signInError.message);
         return;
       }
 
       router.push("/dashboard");
       router.refresh();
     } catch (error) {
-      setError("Error al iniciar sesión");
+      console.error('Error general:', error);
+      setError("Error de conexión. Por favor, verifica tu conexión a internet e inténtalo de nuevo.");
     }
   };
 
