@@ -1,9 +1,9 @@
-import { getAllArticles } from "@/utils";
+import { articlesService } from "@/services/articles/articles.services";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
   try {
-    const articles = await getAllArticles();
+    const articles = await articlesService.getAll();
     return NextResponse.json(articles, {
       status: 200,
       headers: {
