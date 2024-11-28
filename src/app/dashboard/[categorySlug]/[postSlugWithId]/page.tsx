@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDashboardStore } from '@/store/dashboard.store';
 import { EditableTitle } from '@/components/dashboard/EditableTitle';
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { EditableDescription } from '@/components/dashboard/EditableDescription';
 import styles from "./Post.module.css";
 
 export default function PostPage({ params }: { 
@@ -11,6 +12,7 @@ export default function PostPage({ params }: {
 }) {
   const { setCurrentPost } = useDashboardStore();
   const supabase = createClientComponentClient();
+  const [newTitle, setNewTitle] = useState('');
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -24,10 +26,10 @@ export default function PostPage({ params }: {
         }
 
         const { data, error } = await supabase
-          .from('posts')
-          .select('*')
-          .eq('id', postId)
-          .single();
+        .from('posts')
+        .select('id, title, description, category_id, created_at')
+        .eq('id', postId)
+        .single();
 
         if (error) {
           console.error('Error al obtener el post:', error);
@@ -48,6 +50,8 @@ export default function PostPage({ params }: {
   return (
     <div className={styles.container}>
       <EditableTitle postId={params.postSlugWithId} />
+      <hr className={styles.separator} />
+      <EditableDescription postId={params.postSlugWithId} />
     </div>
   );
 } 

@@ -8,98 +8,108 @@ interface DashboardStore {
   isSaving: boolean;
   setPosts: (posts: Post[]) => void;
   setCurrentPost: (post: Post | null) => void;
-  updatePostTitle: (postId: string, title: string) => void;
-  syncTitleToServer: (postId: string, title: string) => Promise<void>;
+  updatePost: (postId: string, updates: Partial<Post>) => void;
   addPost: (categoryId: string) => Promise<Post | null>;
   deletePost: (postId: string) => Promise<boolean>;
   getPostsByCategory: (categoryId: string) => Post[];
 }
 
-export const useDashboardStore = create<DashboardStore>((set, get) => ({
-  posts: [],
-  currentPost: null,
-  isSaving: false,
+export const useDashboardStore = create<DashboardStore>((set, get) => {
+  let saveTimeout: NodeJS.Timeout;
 
-  setPosts: (posts) => set({ posts }),
-  setCurrentPost: (post) => set({ currentPost: post }),
-
-  updatePostTitle: (postId, title) => {
-    set(state => ({
-      currentPost: state.currentPost ? { ...state.currentPost, title } : null,
-      posts: state.posts.map(post => 
-        post.id === postId ? { ...post, title } : post
-      )
-    }));
-  },
-
-  syncTitleToServer: async (postId, title) => {
+  const saveToServer = async (postId: string, updates: Partial<Post>) => {
     const supabase = createClientComponentClient();
-    
-    set({ isSaving: true });
-    
     try {
       const { error } = await supabase
         .from('posts')
-        .update({ title })
+        .update(updates)
         .eq('id', postId);
 
       if (error) throw error;
+      
+      set({ isSaving: true });
+      setTimeout(() => set({ isSaving: false }), 500);
     } catch (error) {
-      console.error('Error al sincronizar título:', error);
-    } finally {
+      console.error('Error al guardar cambios:', error);
       set({ isSaving: false });
     }
-  },
+  };
 
-  getPostsByCategory: (categoryId: string) => {
-    const { posts } = get();
-    return posts.filter(post => post.category_id === categoryId);
-  },
+  return {
+    posts: [],
+    currentPost: null,
+    isSaving: false,
 
-  addPost: async (categoryId: string) => {
-    const supabase = createClientComponentClient();
-    try {
-      const newPost = {
-        title: 'Nuevo Artículo',
-        category_id: categoryId
-      };
+    setPosts: (posts) => set({ posts }),
+    setCurrentPost: (post) => set({ currentPost: post }),
 
-      const { data, error } = await supabase
-        .from('posts')
-        .insert([newPost])
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      if (data) {
-        set(state => ({ posts: [data, ...state.posts] }));
-        return data;
-      }
-      return null;
-    } catch (error) {
-      console.error('Error al crear post:', error);
-      return null;
-    }
-  },
-
-  deletePost: async (postId: string) => {
-    const supabase = createClientComponentClient();
-    try {
-      const { error } = await supabase
-        .from('posts')
-        .delete()
-        .eq('id', postId);
-
-      if (error) throw error;
-
+    updatePost: (postId, updates) => {
       set(state => ({
-        posts: state.posts.filter(post => post.id !== postId)
+        currentPost: state.currentPost?.id === postId 
+          ? { ...state.currentPost, ...updates }
+          : state.currentPost,
+        posts: state.posts.map(post => 
+          post.id === postId ? { ...post, ...updates } : post
+        ),
+        isSaving: false
       }));
-      return true;
-    } catch (error) {
-      console.error('Error al eliminar post:', error);
-      return false;
+
+      if (saveTimeout) clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(() => {
+        saveToServer(postId, updates);
+      }, 2000);
+    },
+
+    getPostsByCategory: (categoryId) => {
+      const { posts } = get();
+      return posts.filter(post => post.category_id === categoryId);
+    },
+
+    addPost: async (categoryId) => {
+      const supabase = createClientComponentClient();
+      try {
+        const newPost = {
+          title: 'Nuevo Artículo',
+          category_id: categoryId
+        };
+
+        const { data, error } = await supabase
+          .from('posts')
+          .insert([newPost])
+          .select()
+          .single();
+
+        if (error) throw error;
+
+        if (data) {
+          set(state => ({ posts: [data, ...state.posts] }));
+          return data;
+        }
+        return null;
+      } catch (error) {
+        console.error('Error al crear post:', error);
+        return null;
+      }
+    },
+
+    deletePost: async (postId) => {
+      const supabase = createClientComponentClient();
+      try {
+        const { error } = await supabase
+          .from('posts')
+          .delete()
+          .eq('id', postId);
+
+        if (error) throw error;
+
+        set(state => ({
+          posts: state.posts.filter(post => post.id !== postId)
+        }));
+        return true;
+      } catch (error) {
+        console.error('Error al eliminar post:', error);
+        return false;
+      }
     }
-  }
-})); 
+  };
+}); 
