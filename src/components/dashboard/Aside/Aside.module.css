@@ -228,26 +228,53 @@
   }
   
   .articleItem {
-    padding: 0.5rem 1rem;
-    margin: 0.25rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 4px 0;
     border-radius: 4px;
-    color: #9ca3af;
+    transition: background-color 0.2s ease;
+    position: relative;
+  }
+  
+  .articleTitle {
+    flex: 1;
     cursor: pointer;
-    transition: all 0.2s ease;
+    color: #e4e4e7;
     font-size: 0.875rem;
+  }
+  
+  .articleActions {
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.2s ease;
   }
   
   .articleItem:hover {
     background-color: #2d2d2d;
-    color: #fff;
+  }
+  
+  .articleItem:hover .articleActions {
+    opacity: 1;
+  }
+  
+  .menuItem {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    color: #e4e4e7;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .menuItem:hover {
+    background-color: #404040;
   }
   
   .deleteButton {
-    color: #ef4444;
-  }
-  
-  .deleteButton:hover {
-    background-color: #ef44441a;
     color: #ef4444;
   }
   
@@ -373,17 +400,4 @@
   
   .categoryContent {
     padding-left: 24px;
-  }
-  
-  .articleItem {
-    padding: 8px 12px;
-    margin: 4px 0;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-  }
-  
-  .articleItem:hover {
-    background-color: #2d2d2d;
-    color: #fff;
   }

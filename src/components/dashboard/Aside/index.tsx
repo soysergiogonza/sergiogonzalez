@@ -17,11 +17,12 @@ type Category = {
 export const Aside = () => {
   const router = useRouter();
   const { categories, addCategory, updateCategory, deleteCategory } = useCategories();
-  const { posts, addPost, getPostsByCategory } = usePosts();
+  const { posts, addPost, deletePost, getPostsByCategory } = usePosts();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [newName, setNewName] = useState('');
+  const [activeArticleMenu, setActiveArticleMenu] = useState<string | null>(null);
 
   const handleMenuClick = (e: React.MouseEvent, categoryId: string) => {
     e.preventDefault();
@@ -74,6 +75,21 @@ export const Aside = () => {
         router.push(`/dashboard/${categorySlug}/${postSlug}-${newPost.id}`);
         router.refresh();
       }
+    }
+  };
+
+  const handleArticleMenuClick = (e: React.MouseEvent, articleId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setActiveArticleMenu(activeArticleMenu === articleId ? null : articleId);
+  };
+
+  const handleDeleteArticle = async (e: React.MouseEvent, articleId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (window.confirm('¿Estás seguro de que quieres eliminar este artículo?')) {
+      await deletePost(articleId);
+      setActiveArticleMenu(null);
     }
   };
 
@@ -152,15 +168,39 @@ export const Aside = () => {
                     <div 
                       key={post.id} 
                       className={styles.articleItem}
-                      onClick={() => {
-                        const categorySlug = slugify(category.name);
-                        const postSlug = slugify(post.title);
-                        
-                        router.push(`/dashboard/${categorySlug}/${postSlug}-${post.id}`);
-                        router.refresh();
-                      }}
                     >
-                      {post.title}
+                      <div 
+                        className={styles.articleTitle}
+                        onClick={() => {
+                          const categorySlug = slugify(category.name);
+                          const postSlug = slugify(post.title);
+                          router.push(`/dashboard/${categorySlug}/${postSlug}-${post.id}`);
+                          router.refresh();
+                        }}
+                      >
+                        {post.title}
+                      </div>
+                      <div className={styles.articleActions}>
+                        <button 
+                          className={styles.menuButton}
+                          onClick={(e) => handleArticleMenuClick(e, post.id)}
+                        >
+                          <MoreVertical size={16} />
+                        </button>
+                        {activeArticleMenu === post.id && (
+                          <div 
+                            className={styles.dropdownMenu}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <button 
+                              className={`${styles.menuItem} ${styles.deleteButton}`}
+                              onClick={(e) => handleDeleteArticle(e, post.id)}
+                            >
+                              Eliminar artículo
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>

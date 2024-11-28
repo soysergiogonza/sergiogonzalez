@@ -61,9 +61,27 @@ export const usePosts = () => {
     return posts.filter(post => post.category_id === categoryId);
   };
 
+  const deletePost = async (postId: string) => {
+    try {
+      const { error } = await supabase
+        .from('posts')
+        .delete()
+        .eq('id', postId);
+
+      if (error) throw error;
+
+      setPosts(posts.filter(post => post.id !== postId));
+      return true;
+    } catch (error) {
+      console.error('Error al eliminar post:', error);
+      return false;
+    }
+  };
+
   return {
     posts,
     addPost,
+    deletePost,
     getPostsByCategory
   };
 }; 
