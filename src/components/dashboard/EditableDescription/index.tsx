@@ -3,16 +3,22 @@ import { useDashboardStore } from '@/store/dashboard.store';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { common, createLowlight } from 'lowlight';
-import TextStyle from '@tiptap/extension-text-style';
-import Color from '@tiptap/extension-color';
 import { debounce } from '@/utils/debounce';
 import styles from './EditableDescription.module.css';
-import css from 'styled-jsx/css';
 import { FloatingMenu } from '../FloatingMenu/FloatingMenu';
 import javascript from 'highlight.js/lib/languages/javascript'
 import typescript from 'highlight.js/lib/languages/typescript'
+import Highlight from '@tiptap/extension-highlight'
+import Typography from '@tiptap/extension-typography'
+import Document from '@tiptap/extension-document'
+import Dropcursor from '@tiptap/extension-dropcursor'
+import Image from '@tiptap/extension-image'
+import Paragraph from '@tiptap/extension-paragraph'
+import Text from '@tiptap/extension-text'
+import { Color } from '@tiptap/extension-color'
+import ListItem from '@tiptap/extension-list-item'
+import TextStyle from '@tiptap/extension-text-style'
 
 
 const lowlight = createLowlight(common);
@@ -42,12 +48,21 @@ export const EditableDescription = ({ postId }: EditableDescriptionProps) => {
     debouncedSync(uuid, newDescription);
   }, [currentPost, uuid, updatePost]);
 
+  // @ts-ignore
   const editor = useEditor({
     extensions: [
-      StarterKit,
-      Placeholder.configure({
-        placeholder: 'Agregar descripción...',
-      }),
+        StarterKit.configure(),
+        Highlight.configure(),
+        Typography.configure(),
+        Color,
+        Document,
+        Paragraph,
+        Text,
+        Image,
+        Dropcursor,
+        TextStyle,
+        Placeholder,
+        ListItem,
     ],
     content: currentPost?.description || '',
     editorProps: {

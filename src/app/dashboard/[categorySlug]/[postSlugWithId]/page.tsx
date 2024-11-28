@@ -6,6 +6,7 @@ import { EditableTitle } from '@/components/dashboard/EditableTitle';
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { EditableDescription } from '@/components/dashboard/EditableDescription';
 import styles from "./Post.module.css";
+import type { Post } from '@/types/blog/post';  // Añade esta línea al inicio del archivo
 
 export default function PostPage({ params }: { 
   params: { categorySlug: string; postSlugWithId: string } 
@@ -37,7 +38,21 @@ export default function PostPage({ params }: {
         }
 
         if (data) {
-          setCurrentPost(data);
+          const completePost: Post = {
+            id: data.id,
+            title: data.title,
+            slug: data.slug || '',
+            content: data.content || '',
+            description: data.description,
+            date: data.date || new Date().toISOString(),
+            category: data.category || '',
+            category_id: data.category_id,
+            position: data.position || 0,
+            published: data.published || false,
+            created_at: data.created_at,
+            updated_at: data.updated_at || data.created_at,
+          };
+          setCurrentPost(completePost);
         }
       } catch (error) {
         console.error('Error en fetchPost:', error);
