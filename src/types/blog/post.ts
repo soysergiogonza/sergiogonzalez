@@ -15,4 +15,5 @@ export interface Post {
   banner?: string
   created_at: string
   updated_at: string
+  category_id: string
 } 
