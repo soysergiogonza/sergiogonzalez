@@ -41,16 +41,9 @@ export default function PostPage({ params }: {
           const completePost: Post = {
             id: data.id,
             title: data.title,
-            slug: data.slug || '',
-            content: data.content || '',
             description: data.description,
-            date: data.date || new Date().toISOString(),
-            category: data.category || '',
             category_id: data.category_id,
-            position: data.position || 0,
-            published: data.published || false,
             created_at: data.created_at,
-            updated_at: data.updated_at || data.created_at,
           };
           setCurrentPost(completePost);
         }
