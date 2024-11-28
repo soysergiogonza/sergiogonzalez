@@ -18,7 +18,7 @@ type Category = {
 export const Aside = () => {
   const router = useRouter();
   const { categories, addCategory, updateCategory, deleteCategory } = useCategories();
-  const { posts, setPosts, getPostsByCategory } = useDashboardStore();
+  const { posts, setPosts, getPostsByCategory, addPost, deletePost } = useDashboardStore();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
