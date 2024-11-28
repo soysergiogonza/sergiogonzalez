@@ -1,0 +1,53 @@
+.editorWrapper {
+  margin-top: 2rem;
+}
+
+.editor {
+  min-height: calc(100vh - 200px);
+  padding: 1rem;
+}
+
+.editor p {
+  margin: 1rem 0;
+  color: #e4e4e7;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.editor h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+  color: #e4e4e7;
+}
+
+.editor h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.5rem 0 1rem;
+  color: #e4e4e7;
+}
+
+.editor h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.25rem 0 1rem;
+  color: #e4e4e7;
+}
+
+.editor ul, .editor ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+  color: #e4e4e7;
+}
+
+.editor li {
+  margin: 0.5rem 0;
+}
+
+.editor blockquote {
+  border-left: 4px solid #4b5563;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #9ca3af;
+} 

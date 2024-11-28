@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, ChevronRight, MoreVertical, X } from 'lucide-react';
 import styles from './Aside.module.css';
 import { useCategories } from '@/hooks/dashboard/useCategories';
-import { usePosts } from '@/hooks/dashboard/usePosts';
+import { useDashboardStore } from '@/store/dashboard.store';
 import { useRouter } from 'next/navigation';
 import { slugify } from '@/utils/slugify';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 type Category = {
   id: string;
@@ -17,12 +18,33 @@ type Category = {
 export const Aside = () => {
   const router = useRouter();
   const { categories, addCategory, updateCategory, deleteCategory } = useCategories();
-  const { posts, addPost, deletePost, getPostsByCategory } = usePosts();
+  const { posts, setPosts, getPostsByCategory } = useDashboardStore();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [newName, setNewName] = useState('');
   const [activeArticleMenu, setActiveArticleMenu] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      const supabase = createClientComponentClient();
+      const { data, error } = await supabase
+        .from('posts')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error al cargar posts:', error);
+        return;
+      }
+
+      if (data) {
+        setPosts(data);
+      }
+    };
+
+    loadPosts();
+  }, [setPosts]);
 
   const handleMenuClick = (e: React.MouseEvent, categoryId: string) => {
     e.preventDefault();

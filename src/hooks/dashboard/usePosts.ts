@@ -4,6 +4,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 type Post = {
   id: string;
   title: string;
+  content: string;
   category_id: string;
   created_at: string;
 };
