@@ -1,6 +1,14 @@
+export interface Article {
+  title: string;
+  url: string;
+}
+
 export interface Category {
-  id: string
-  name: string
-  icon?: string
-  created_at?: string
-} 
+  category: string;
+  position: number;
+  icon: {
+    type: string;
+    emoji?: string;
+  } | null;
+  articles: Article[];
+}

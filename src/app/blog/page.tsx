@@ -1,9 +1,8 @@
-"use client";
-
 const BlogPage = () => {
   return (
-    <div className='blog-container'>
-      <h1>Este blog es dedicado para mis estudiantes</h1>
+    <div>
+      <h1>Blog</h1>
+      {/* Aquí irá el contenido principal del blog */}
     </div>
   );
 };

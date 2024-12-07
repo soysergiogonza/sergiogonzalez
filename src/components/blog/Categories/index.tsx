@@ -1,59 +1,59 @@
 "use client";
 
-import styles from "./Categories.module.css";
+import styles from '@/app/blog/Blog.module.css';
 import Link from "next/link";
-import { Icon } from "../Icon";
-import { useEffect } from "react";
-import { useBlogStore } from "@/store";
-import { articlesService } from "@/services/articles/articles.services";
+import { useCategoryStore } from '@/store/categoryStore';
+import { useEffect } from 'react';
+
+const renderIcon = (icon: any) => {
+  if (!icon) return null;
+  
+  switch (icon.type) {
+    case 'emoji':
+      return <span>{icon.emoji}</span>;
+    case 'file':
+      return <img src={icon.file.url} alt="" className={styles.categoryIcon} />;
+    case 'external':
+      return <img src={icon.external.url} alt="" className={styles.categoryIcon} />;
+    default:
+      return null;
+  }
+};
 
 export const Categories = () => {
-  const { posts, setPosts } = useBlogStore();
+  const { categories, isLoading, error, fetchCategories } = useCategoryStore();
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const data = await articlesService.getAll();
-        setPosts(data);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    };
+    fetchCategories();
+  }, [fetchCategories]);
 
-    fetchPosts();
-  }, [setPosts]);
-
-  const categories = Array.from(
-    new Set(posts.map((post) => post.category).filter(Boolean))
-  );
+  if (isLoading) return <div>Cargando categorías...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <section className={styles.routes}>
-      {categories.map((category, index) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-        <div key={index}>
-          <details name='category' className={styles.details}>
-            <summary className={styles.summary}>
-              <h4 className={styles.categoryTitle}>{category}</h4>
+      {categories.map(({ category, position, icon, articles }) => (
+        <div key={category} className={styles.categoryContainer}>
+          <details name='category'>
+            <summary className={styles.category}>
+              {renderIcon(icon)}
+              <span>{category}</span>
+              {articles.length > 0 && (
+                <span className={styles.articleCount}>
+                  {articles.length}
+                </span>
+              )}
             </summary>
-            <div className={styles.articleList}>
-              {posts
-                .filter((post) => post.category === category)
-                .sort((a, b) => (a.position || 0) - (b.position || 0))
-                .map((post) => (
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    key={post.slug}
-                    className={styles.articleTitle}
-                  >
-                    <Icon
-                      icon={post.icon}
-                      size='1.2rem'
-                      className='icon'
-                    />
-                    <span>{post.title}</span>
-                  </Link>
-                ))}
+            <div className={styles.articles}>
+              {articles.map((article) => (
+                <Link 
+                  key={article.title}
+                  href={`/blog/${article.url}`}
+                  className={styles.article}
+                >
+                  <span>{article.title}</span>
+                </Link>
+              ))}
             </div>
           </details>
         </div>

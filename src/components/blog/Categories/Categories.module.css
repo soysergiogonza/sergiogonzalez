@@ -2,59 +2,97 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding: 1rem;
+}
 
-  .details {
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    transition: all 0.3s ease;
+.categoryContainer {
+  background: var(--background-secondary);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
 
-    &[open] {
-      border: 1px solid #035707;
-      backdrop-filter: blur(5px);
-      background: rgba(0, 255, 0, 0.1);
-      box-shadow: 0 4px 15px rgba(68, 190, 116, 0.2);
-      border-radius: 0.75rem;
-      padding: 1rem;
-      transition: all 0.3s ease;
+.categoryContainer:hover {
+  transform: translateX(4px);
+}
 
-      .summary {
-        margin-bottom: 0.5rem;
-        font-weight: bold;
-        color: #035707;
-      }
-    }
+.details {
+  width: 100%;
+}
 
-    .summary {
-      cursor: pointer;
-      font-weight: 500;
+.summary {
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  list-style: none;
+}
 
-      .categoryTitle {
-        display: inline-block;
-      }
-    }
+.summary::-webkit-details-marker {
+  display: none;
+}
 
-    .articleList {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      padding-left: 1rem;
-      margin-top: 0.5rem;
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
 
-      .articleTitle {
-        display: flex;
-        align-items: center;
-        gap: .5rem;
-        font-size: 0.875rem;
-        overflow-wrap: break-word;
-        text-decoration: none;
-        color: inherit;
-        transition: color 0.2s ease;
+.categoryTitle {
+  margin: 0;
+  font-size: 1rem;
+  flex-grow: 1;
+}
 
-        &:hover {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
+.articleCount {
+  background: var(--background-tertiary);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.articleList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.articleTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.articleIcon {
+  font-size: 1.25rem;
+}
+
+.articleTitle:hover {
+  color: var(--text-primary);
+}
+
+.loading, .error, .empty {
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.active {
+  background: var(--background-tertiary);
+}
+
+/* Animación para el detalle al abrir/cerrar */
+.details[open] .summary ~ * {
+  animation: sweep .3s ease-in-out;
+}
+
+@keyframes sweep {
+  0%    {opacity: 0; transform: translateX(-10px)}
+  100%  {opacity: 1; transform: translateX(0)}
 }

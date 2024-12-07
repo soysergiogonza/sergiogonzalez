@@ -10,45 +10,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mapbox/rehype-prism": "^0.9.0",
-    "@mdx-js/loader": "^3.0.1",
-    "@mdx-js/react": "^3.0.1",
-    "@next/mdx": "^14.2.4",
-    "@shikijs/transformers": "^1.22.2",
-    "@supabase/auth-helpers-nextjs": "^0.10.0",
-    "@supabase/supabase-js": "^2.46.1",
-    "@tiptap/extension-bubble-menu": "^2.10.3",
-    "@tiptap/extension-code-block-lowlight": "^2.10.3",
-    "@tiptap/extension-color": "^2.10.3",
-    "@tiptap/extension-document": "^2.10.3",
-    "@tiptap/extension-dropcursor": "^2.10.3",
-    "@tiptap/extension-highlight": "^2.10.3",
-    "@tiptap/extension-image": "^2.10.3",
-    "@tiptap/extension-list-item": "^2.10.3",
-    "@tiptap/extension-paragraph": "^2.10.3",
-    "@tiptap/extension-placeholder": "^2.10.3",
-    "@tiptap/extension-text": "^2.10.3",
-    "@tiptap/extension-text-style": "^2.10.3",
-    "@tiptap/extension-typography": "^2.10.3",
-    "@tiptap/pm": "^2.10.3",
-    "@tiptap/react": "^2.10.0",
-    "@tiptap/starter-kit": "^2.10.0",
-    "@types/mdx": "^2.0.13",
+    "@notionhq/client": "^2.2.15",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "gray-matter": "^4.0.3",
-    "highlight.js": "^11.10.0",
-    "lowlight": "^3.2.0",
-    "lucide-react": "^0.462.0",
     "next": "14.2.4",
-    "next-mdx-remote": "^5.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
-    "rehype-pretty-code": "^0.14.0",
-    "rehype-prism-plus": "^2.0.0",
-    "remark-gfm": "^4.0.0",
     "zustand": "^5.0.1"
   },
   "devDependencies": {
@@ -58,5 +27,5 @@
     "@types/react-dom": "^18",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@9.3.0+sha256.e1f9e8d1a16607a46dd3c158b5f7a7dc7945501d1c6222d454d63d033d1d918f"
+  "packageManager": "pnpm@9.3.0"
 }

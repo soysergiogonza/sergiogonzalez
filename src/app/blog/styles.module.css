@@ -1,0 +1,21 @@
+.blog {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+
+.blogContainer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.blogContent {
+  display: grid;
+  grid-template-columns: 300px 1fr; /* Aside: 300px, Main: resto del espacio */
+  gap: 2rem;
+}
+
+.blogMain {
+  width: 100%;
+} 

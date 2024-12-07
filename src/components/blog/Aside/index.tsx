@@ -1,18 +1,11 @@
 "use client";
 
-import { Categories } from "@/components/blog";
-
-import styles from "./Aside.module.css";
+import { Categories } from '@/components/blog/Categories';
 
 export const Aside = () => {
   return (
-    <aside className={styles.aside}>
-      <div className={styles.sidebar}>
-        {/* @ts-ignore*/}
-        <div className={styles.contentWrapper}>
-          <Categories />
-        </div>
-      </div>
+    <aside className="blog-aside">
+      <Categories />
     </aside>
   );
 };
