@@ -26,7 +26,7 @@ export const useCategoryStore = create<CategoryState>()(
 
       setCategories: (categories) => set({ categories }),
       setSelectedCategory: (category) => set({ selectedCategory: category }),
-      
+
       fetchCategories: async () => {
         const now = Date.now();
         const lastFetched = get().lastFetched;
@@ -41,11 +41,12 @@ export const useCategoryStore = create<CategoryState>()(
           set({ isLoading: true, error: null });
           const response = await fetch('/api/notion/pages');
           const data = await response.json();
-          
+
           if (!data.success || !data.results) {
             throw new Error('No se encontraron categorías');
           }
 
+          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
           const formattedCategories = data.results.map((page: any) => ({
             category: page.properties.Title?.title[0]?.plain_text || 'Sin título',
             position: page.properties.Position?.number || 0,
@@ -53,15 +54,16 @@ export const useCategoryStore = create<CategoryState>()(
             articles: page.articles || []
           }));
 
-          set({ 
+          set({
             categories: formattedCategories,
             lastFetched: now,
-            isLoading: false 
+            isLoading: false
           });
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         } catch (error: any) {
           console.error('Error detallado:', error);
-          set({ 
-            error: error.message || 'Error al cargar las categorías', 
+          set({
+            error: error.message || 'Error al cargar las categorías',
             isLoading: false
           });
         }
@@ -76,4 +78,4 @@ export const useCategoryStore = create<CategoryState>()(
       })
     }
   )
-); 
+);
