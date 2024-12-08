@@ -1,26 +1,25 @@
 import { FaHome, FaProjectDiagram, FaEnvelope, FaBlog } from 'react-icons/fa';
-import type { IconType } from 'react-icons';
-import type { Page } from "@/types";
+import type { NavItemProps } from "@/types/navigation";
 
-export const pages: Page[] = [
+export const pages: NavItemProps[] = [
   {
-    name: "Home",
-    url: "/",
+    label: "Home",
+    href: "/",
     icon: FaHome
   },
   {
-    name: "Projects",
-    url: "/projects",
+    label: "Projects",
+    href: "/projects",
     icon: FaProjectDiagram
   },
   {
-    name: "Contact",
-    url: "/contact",
+    label: "Contact",
+    href: "/contact",
     icon: FaEnvelope
   },
   {
-    name: "Blog",
-    url: "/blog",
+    label: "Blog",
+    href: "/blog",
     icon: FaBlog
   },
 ];

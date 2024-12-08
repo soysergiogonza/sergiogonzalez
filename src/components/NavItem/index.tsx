@@ -1,27 +1,22 @@
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./NavItem.module.css";
-import type { IconType } from 'react-icons';
+import clsx from "clsx";
+import type { NavItemProps } from "@/types/navigation";
 
-interface NavItemProps {
-  url: string;
-  name: string;
-  Icon: IconType;
-}
-
-export const NavItem = ({ url, name, Icon }: NavItemProps) => {
+export const NavItem = ({ href, icon: Icon, label }: NavItemProps) => {
   const pathname = usePathname();
-  const isActive = pathname === url;
+  const isActive = pathname === href || 
+    (href !== '/' && pathname.startsWith(href));
 
   return (
     <Link
-      href={url}
-      className={`${styles.link} ${isActive ? styles.active : ""}`}
+      href={href}
+      className={clsx(styles.link, isActive && styles.active)}
     >
       <Icon />
-      <span>{name}</span>
+      <span>{label}</span>
     </Link>
   );
 };

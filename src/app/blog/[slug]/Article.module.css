@@ -1,0 +1,28 @@
+.article {
+  height: 100%; /* Ocupa todo el alto disponible del contenedor padre */
+  overflow-y: auto; /* Permite scroll dentro del artículo */
+  padding: 2rem;
+  
+  /* Scrollbar personalizado */
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 4px;
+  }
+}
+
+/* Contenedor para el contenido de Notion */
+.notionContent {
+  max-width: 100%;
+  margin: 0 auto;
+}

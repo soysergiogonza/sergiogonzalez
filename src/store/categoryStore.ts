@@ -4,10 +4,12 @@ import { Category, Article } from '@/types/notion';
 interface CategoryStore {
   categories: Category[];
   selectedCategory: string | null;
+  selectedArticle: string | null;
   isLoading: boolean;
   error: string | null;
   setCategories: (categories: Category[]) => void;
   setSelectedCategory: (category: string | null) => void;
+  setSelectedArticle: (articleUrl: string | null) => void;
   getArticlesByCategory: (category: string) => Article[];
   getAllArticles: () => Article[];
   fetchCategories: () => Promise<void>;
@@ -16,6 +18,7 @@ interface CategoryStore {
 export const useCategoryStore = create<CategoryStore>((set, get) => ({
   categories: [],
   selectedCategory: null,
+  selectedArticle: null,
   isLoading: false,
   error: null,
 
@@ -28,6 +31,8 @@ export const useCategoryStore = create<CategoryStore>((set, get) => ({
   },
 
   setSelectedCategory: (category) => set({ selectedCategory: category }),
+
+  setSelectedArticle: (articleUrl) => set({ selectedArticle: articleUrl }),
 
   getArticlesByCategory: (category) => {
     const { categories } = get();

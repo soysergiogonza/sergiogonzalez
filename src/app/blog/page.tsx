@@ -1,5 +1,3 @@
-"use client";
-
 import { Suspense } from 'react';
 import styles from './Blog.module.css';
 import { Category } from '@/types/notion';
