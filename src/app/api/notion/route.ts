@@ -5,7 +5,6 @@ import { NOTION_DATABASE_ID } from '@/environments/environments';
 export async function GET() {
   try {
     if (!NOTION_DATABASE_ID) {
-      console.error('NOTION_DATABASE_ID no configurado');
       return NextResponse.json(
         { error: 'NOTION_DATABASE_ID no configurado' },
         { status: 500 }
@@ -19,7 +18,6 @@ export async function GET() {
 
     return NextResponse.json({ blocks: blocks.results });
   } catch (error) {
-    console.error('Error al obtener datos de Notion:', error);
     return NextResponse.json(
       { error: 'Error al obtener datos de Notion' },
       { status: 500 }

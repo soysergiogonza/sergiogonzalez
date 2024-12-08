@@ -8,14 +8,12 @@ const ArticlePage = async ({ params }: ArticleBlogParams) => {
   
   try {
     const notionData = await getNotionContent(slug);
-
     return (
       <article className={styles.article}>
         <NotionRenderer notionData={notionData} />
       </article>
     );
   } catch (error) {
-    console.error('Error al cargar el artículo:', error);
     return <div>Error al cargar el artículo</div>;
   }
 };
