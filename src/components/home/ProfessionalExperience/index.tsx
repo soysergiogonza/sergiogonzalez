@@ -11,7 +11,7 @@ export const ProfessionalExperience = () => {
       </h2>
       <ul className={styles.timeline}>
         {experience.map((project) => (
-          <li className={styles.timelineEvent}>
+          <li className={styles.timelineEvent} key={`${project.companyName}-${project.title}`}>
             <picture className={styles.companyImage}>
               <Image
                 src={project.image}

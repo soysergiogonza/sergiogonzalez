@@ -1,17 +1,73 @@
 .link {
-  padding-block: 0.5rem;
-  padding-inline: 1.5rem;
-  border-radius: var(--rounded-full);
-  margin-block: 0.25rem;
-  transition: var(--transition);
-  width: fit-content;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  /* Estilos para desktop */
+  @media (width > 768px) {
+    padding: 0.5rem 1.5rem;
+    font-size: 1.125rem;
+    border-radius: 1rem;
+
+    &:hover {
+      color: var(--primary-color);
+      background: rgba(139, 92, 246, 0.1);
+    }
+
+    & svg {
+      font-size: 1.25rem;
+    }
+  }
+
+  /* Estilos para móvil */
+  @media (width <= 768px) {
+    flex-direction: column;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(139, 92, 246, 0.05)
+    );
+    
+    & svg {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    &:hover {
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(139, 92, 246, 0.1)
+      );
+    }
+  }
 }
 
 .active {
-  background: var(--primary-color);
-  transition: var(--transition);
-}
+  color: var(--primary-color);
 
-.link:not(.active):hover {
-  background-color: var(--primary-color__opacity);
+  @media (width > 768px) {
+    background: rgba(139, 92, 246, 0.1);
+  }
+
+  @media (width <= 768px) {
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(139, 92, 246, 0.15)
+    );
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.1);
+  }
+
+  & svg {
+    color: var(--primary-color);
+  }
 }
