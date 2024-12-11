@@ -4,12 +4,23 @@ import { getNotionContent } from '@/lib/notion/client';
 import styles from './Article.module.css';
 import type { ArticleBlogParams } from '@/types/blog';
 import { ArticleSkeleton } from '@/components/blog/ArticleSkeleton';
+import { isFullPage } from '@notionhq/client';
+import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 export async function generateMetadata({ params }: ArticleBlogParams) {
   try {
     const notionData = await getNotionContent(params.slug);
-    // Asumiendo que el primer bloque contiene la información del artículo
-    const title = notionData[0]?.paragraph?.rich_text[0]?.plain_text || 'Artículo';
+    
+    let title = 'Artículo';
+    if (isFullPage(notionData.page)) {
+      const titleProperty = notionData.page.properties['title'] as {
+        type: 'title';
+        title: Array<{
+          plain_text: string;
+        }>;
+      };
+      title = titleProperty.title?.[0]?.plain_text || title;
+    }
     
     return {
       title,
@@ -26,10 +37,6 @@ export async function generateMetadata({ params }: ArticleBlogParams) {
 const ArticlePage = async ({ params }: ArticleBlogParams) => {
   const { slug } = params;
   
-  if (!slug) {
-    throw new Error('Slug no proporcionado');
-  }
-
   return (
     <Suspense fallback={<ArticleSkeleton />}>
       <article className={styles.article}>
