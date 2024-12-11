@@ -9,10 +9,8 @@ export default function BlogLayout({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    // Agregamos la clase cuando el componente se monta
     document.body.classList.add(styles.blogBody);
     
-    // La removemos cuando se desmonta
     return () => {
       document.body.classList.remove(styles.blogBody);
     };

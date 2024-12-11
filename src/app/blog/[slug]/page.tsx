@@ -1,21 +1,38 @@
+import { Suspense } from 'react';
 import { NotionRenderer } from '@/components/blog/NotionRenderer';
 import { getNotionContent } from '@/lib/notion/client';
 import styles from './Article.module.css';
 import type { ArticleBlogParams } from '@/types/blog';
+import { ArticleSkeleton } from '@/components/blog/ArticleSkeleton';
+
+export async function generateMetadata({ params }: ArticleBlogParams) {
+  try {
+    const notionData = await getNotionContent(params.slug);
+    // Asumiendo que el primer bloque contiene la información del artículo
+    const title = notionData[0]?.paragraph?.rich_text[0]?.plain_text || 'Artículo';
+    
+    return {
+      title,
+      description: 'Artículo del blog',
+    };
+  } catch (error) {
+    return {
+      title: 'Artículo',
+      description: 'Artículo del blog',
+    };
+  }
+}
 
 const ArticlePage = async ({ params }: ArticleBlogParams) => {
   const { slug } = params;
   
-  try {
-    const notionData = await getNotionContent(slug);
-    return (
+  return (
+    <Suspense fallback={<ArticleSkeleton />}>
       <article className={styles.article}>
-        <NotionRenderer notionData={notionData} />
+        <NotionRenderer notionData={await getNotionContent(slug)} />
       </article>
-    );
-  } catch (error) {
-    return <div>Error al cargar el artículo</div>;
-  }
+    </Suspense>
+  );
 };
 
 export default ArticlePage;

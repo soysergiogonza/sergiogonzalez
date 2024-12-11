@@ -37,6 +37,21 @@
   --hover-color: rgba(255, 255, 255, 0.1);
   --scrollbar-thumb: #4a4a4a;
   --scrollbar-track: #2a2d34;
+
+  --code-block-bg: #1e1e1e;
+  --code-header-bg: #2d2d2d;
+  --code-inline-bg: rgba(135, 131, 120, 0.15);
+  --code-inline-color: #eb5757;
+  --border-color: #333;
+}
+
+/* Para modo claro si lo necesitas */
+[data-theme="light"] {
+  --code-block-bg: #f6f8fa;
+  --code-header-bg: #f1f1f1;
+  --code-inline-bg: rgba(175, 184, 193, 0.2);
+  --code-inline-color: #0550ae;
+  --border-color: #e1e4e8;
 }
 
 * {
