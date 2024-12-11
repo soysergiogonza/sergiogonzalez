@@ -26,6 +26,10 @@ export async function generateMetadata({ params }: ArticleBlogParams) {
 const ArticlePage = async ({ params }: ArticleBlogParams) => {
   const { slug } = params;
   
+  if (!slug) {
+    throw new Error('Slug no proporcionado');
+  }
+
   return (
     <Suspense fallback={<ArticleSkeleton />}>
       <article className={styles.article}>

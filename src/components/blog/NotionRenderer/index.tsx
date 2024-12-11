@@ -6,38 +6,58 @@ import styles from './NotionRenderer.module.css';
 import { CopyButton } from '../CopyButton';
 import { useImageSize } from '@/hooks/useImageSize';
 import { ImageZoom } from '../ImageZoom';
+import { NotionColor } from '@/lib/notion/colors';
+import { NOTION_COLORS } from '@/lib/notion/colors';
 
 interface NotionRendererProps {
-  notionData: any;
+  notionData: {
+    page: any;
+    blocks: any[];
+  };
 }
 
 export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
-  const blocks = Array.isArray(notionData) ? notionData : [];
-  const pageTitle = notionData?.page?.properties?.title?.title?.[0]?.plain_text;
+  console.log('Datos completos:', {
+    page: notionData.page,
+    pageTitle: notionData.page?.properties?.title?.title?.[0]?.plain_text,
+    blocksLength: notionData.blocks?.length
+  });
+
+  const blocks = Array.isArray(notionData.blocks) ? notionData.blocks : [];
+  const pageTitle = notionData.page?.properties?.title?.title?.[0]?.plain_text;
 
   const renderRichText = (richText: any[]) => {
     if (!richText || !Array.isArray(richText)) return null;
     
-    return richText.map((text: any, index: number) => (
-      <span 
-        key={index}
-        className={`
-          ${text?.annotations?.bold ? styles.bold : ''}
-          ${text?.annotations?.italic ? styles.italic : ''}
-          ${text?.annotations?.code ? styles.inlineCode : ''}
-          ${text?.annotations?.strikethrough ? styles.strikethrough : ''}
-          ${text?.annotations?.underline ? styles.underline : ''}
-        `}
-      >
-        {text?.href ? (
-          <a href={text.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
-            {text?.plain_text || ''}
-          </a>
-        ) : (
-          text?.plain_text || ''
-        )}
-      </span>
-    ));
+    return richText.map((text: any, index: number) => {
+      const color = text?.annotations?.color as NotionColor;
+      const textColor = NOTION_COLORS[color] || NOTION_COLORS.default;
+      
+      return (
+        <span 
+          key={index}
+          className={`
+            ${text?.annotations?.bold ? styles.bold : ''}
+            ${text?.annotations?.italic ? styles.italic : ''}
+            ${text?.annotations?.code ? styles.inlineCode : ''}
+            ${text?.annotations?.strikethrough ? styles.strikethrough : ''}
+            ${text?.annotations?.underline ? styles.underline : ''}
+          `}
+          style={{
+            color: color && color !== 'default' ? textColor : undefined,
+            backgroundColor: color?.includes('background') ? textColor : undefined,
+          }}
+        >
+          {text?.href ? (
+            <a href={text.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
+              {text?.plain_text || ''}
+            </a>
+          ) : (
+            text?.plain_text || ''
+          )}
+        </span>
+      );
+    });
   };
 
   const renderBlock = (block: any) => {
@@ -118,6 +138,7 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
 
         return (
           <ImageZoom
+            key={block.id}
             src={imageUrl}
             alt={caption || 'Article image'}
             caption={caption}
@@ -145,6 +166,9 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
           </div>
         );
 
+      case 'divider':
+        return <hr className={styles.divider} />;
+
       default:
         return null;
     }
@@ -153,7 +177,9 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
   return (
     <div className={styles.notionContent}>
       {pageTitle && (
-        <h1 className={styles.pageTitle}>{pageTitle}</h1>
+        <h1 className={styles.pageTitle}>
+          {pageTitle}
+        </h1>
       )}
       {blocks && blocks.length > 0 && blocks.map((block: any) => (
         <div key={block?.id || Math.random()} className={styles.block}>

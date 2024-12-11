@@ -11,10 +11,12 @@ export const notion = new Client({
 
 export async function getNotionContent(pageId: string) {
   try {
+    // Primero obtenemos los metadatos de la página
     const page = await notion.pages.retrieve({
       page_id: pageId,
     });
 
+    // Luego obtenemos los bloques
     const blocks = await notion.blocks.children.list({
       block_id: pageId,
     });
@@ -24,12 +26,10 @@ export async function getNotionContent(pageId: string) {
       (blocks.results || []).map(async (block: any) => {
         if (block.type === 'column_list') {
           try {
-            // Obtener los bloques de columna
             const columnListChildren = await notion.blocks.children.list({
               block_id: block.id,
             });
 
-            // Para cada columna, obtener su contenido
             const columns = await Promise.all(
               (columnListChildren.results || []).map(async (column: any) => {
                 try {
@@ -68,7 +68,11 @@ export async function getNotionContent(pageId: string) {
       })
     );
 
-    return processedBlocks;
+    // Retornamos tanto los metadatos de la página como los bloques
+    return {
+      page,
+      blocks: processedBlocks
+    };
   } catch (error) {
     console.error('Error fetching Notion content:', error);
     throw error;
