@@ -63,6 +63,15 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
   const renderBlock = (block: any) => {
     if (!block?.type) return null;
 
+    const renderChildren = (blockChildren: any[]) => {
+      if (!Array.isArray(blockChildren)) return null;
+      return blockChildren.map((child: any) => (
+        <div key={child.id} className={styles.block}>
+          {renderBlock(child)}
+        </div>
+      ));
+    };
+
     switch (block.type) {
       case 'paragraph':
         return (
@@ -95,6 +104,54 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
           </div>
         );
 
+      case 'heading_3':
+        return (
+          <div className={styles.headingWrapper}>
+            <h3 id={`heading-${block.id}`} className={styles.heading3}>
+              {renderRichText(block?.heading_3?.rich_text)}
+            </h3>
+            <div className={styles.headingAnchor}>
+              <a href={`#heading-${block.id}`}>#</a>
+            </div>
+          </div>
+        );
+
+      case 'numbered_list_item':
+        return (
+          <li className={styles.numberedItem}>
+            {renderRichText(block.numbered_list_item.rich_text)}
+            {block.has_children && (
+              <ol className={styles.nestedList}>
+                {renderChildren(block.children)}
+              </ol>
+            )}
+          </li>
+        );
+
+      case 'bulleted_list_item':
+        return (
+          <li className={styles.bulletItem}>
+            {renderRichText(block.bulleted_list_item.rich_text)}
+            {block.has_children && (
+              <ul className={styles.nestedList}>
+                {renderChildren(block.children)}
+              </ul>
+            )}
+          </li>
+        );
+
+      case 'toggle':
+        return (
+          <details className={styles.toggle} open={true} name='toggle'>
+            <summary className={styles.toggleSummary}>
+              {renderRichText(block.toggle.rich_text)}
+            </summary>
+            <div className={styles.toggleContent}>
+              {block.has_children && renderChildren(block.children)}
+            </div>
+          </details>
+        );
+
       case 'code':
         const codeContent = block?.code?.rich_text?.[0]?.plain_text || '';
         return (
@@ -120,13 +177,6 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
           </div>
         );
 
-      case 'bulleted_list_item':
-        return (
-          <li className={styles.bulletItem}>
-            {renderRichText(block?.bulleted_list_item?.rich_text)}
-          </li>
-        );
-
       case 'image':
         const imageUrl = block?.image?.type === 'file' 
           ? block?.image?.file?.url 
@@ -144,6 +194,73 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
             caption={caption}
           />
         );
+
+      case 'video':
+        const videoUrl = block?.video?.type === 'file' 
+          ? block?.video?.file?.url 
+          : block?.video?.external?.url;
+          
+        const getYouTubeEmbedUrl = (url: string) => {
+          try {
+            if (!url) return '';
+            
+            let videoId = '';
+            
+            if (url.includes('youtu.be/')) {
+              videoId = url.split('youtu.be/')[1];
+            } else if (url.includes('youtube.com/watch')) {
+              const urlParams = new URLSearchParams(new URL(url).search);
+              videoId = urlParams.get('v') || '';
+            }
+            
+            videoId = videoId.split('&')[0];
+            
+            if (!videoId) return '';
+            
+            return `https://www.youtube-nocookie.com/embed/${videoId}`;
+          } catch (error) {
+            console.error('Error parsing YouTube URL:', error);
+            return '';
+          }
+        };
+
+        if (videoUrl?.includes('youtube.com') || videoUrl?.includes('youtu.be')) {
+          const embedUrl = getYouTubeEmbedUrl(videoUrl);
+          if (!embedUrl) return null;
+
+          return (
+            <div className={styles.videoContainer}>
+              <div className={styles.videoEmbed}>
+                <iframe
+                  src={`${embedUrl}?rel=0&modestbranding=1`}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </div>
+          );
+        }
+            
+        if (videoUrl) {
+          return (
+            <div className={styles.videoContainer}>
+              <video 
+                controls
+                className={styles.video}
+                src={videoUrl}
+                preload="metadata"
+              >
+                Tu navegador no soporta el elemento de video.
+              </video>
+            </div>
+          );
+        }
+
+        return null;
 
       case 'column_list':
         return (
@@ -168,6 +285,13 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
 
       case 'divider':
         return <hr className={styles.divider} />;
+
+      case 'quote':
+        return (
+          <blockquote className={styles.quote}>
+            {renderRichText(block?.quote?.rich_text)}
+          </blockquote>
+        );
 
       default:
         return null;

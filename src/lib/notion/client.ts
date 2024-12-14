@@ -9,66 +9,74 @@ export const notion = new Client({
   auth: NOTION_API_KEY,
 });
 
+async function processBlock(block: any): Promise<any> {
+  if (!block) return null;
+
+  // Procesar el bloque actual
+  let processedBlock = { ...block };
+
+  // Si el bloque tiene hijos, procesarlos recursivamente
+  if (block.has_children) {
+    const childBlocks = await notion.blocks.children.list({
+      block_id: block.id,
+    });
+
+    const children = await Promise.all(
+      (childBlocks.results || []).map(async (childBlock) => {
+        return await processBlock(childBlock);
+      })
+    );
+
+    // Asignar los hijos procesados al bloque
+    processedBlock = {
+      ...processedBlock,
+      children,
+    };
+  }
+
+  // Procesar tipos específicos de bloques
+  switch (block.type) {
+    case 'numbered_list_item':
+    case 'bulleted_list_item':
+    case 'toggle':
+    case 'column_list':
+    case 'column':
+    case 'synced_block':
+    case 'template':
+    case 'child_page':
+    case 'child_database':
+      // Asegurarse de que estos tipos de bloques mantengan su estructura
+      return processedBlock;
+    
+    case 'embed':
+      // Procesar embeds específicos (Figma, Excalidraw, etc.)
+      return {
+        ...processedBlock,
+        embed: {
+          ...block.embed,
+          processedUrl: block.embed.url // Aquí podrías procesar la URL según el tipo de embed
+        }
+      };
+
+    default:
+      return processedBlock;
+  }
+}
+
 export async function getNotionContent(pageId: string) {
   try {
-    // Primero obtenemos los metadatos de la página
     const page = await notion.pages.retrieve({
       page_id: pageId,
     });
 
-    // Luego obtenemos los bloques
     const blocks = await notion.blocks.children.list({
       block_id: pageId,
     });
 
-    // Procesar los bloques y obtener el contenido de las columnas
     const processedBlocks = await Promise.all(
-      (blocks.results || []).map(async (block: any) => {
-        if (block.type === 'column_list') {
-          try {
-            const columnListChildren = await notion.blocks.children.list({
-              block_id: block.id,
-            });
-
-            const columns = await Promise.all(
-              (columnListChildren.results || []).map(async (column: any) => {
-                try {
-                  const columnChildren = await notion.blocks.children.list({
-                    block_id: column.id,
-                  });
-
-                  return {
-                    ...column,
-                    children: columnChildren.results || [],
-                  };
-                } catch (error) {
-                  console.error('Error fetching column content:', error);
-                  return {
-                    ...column,
-                    children: [],
-                  };
-                }
-              })
-            );
-
-            return {
-              ...block,
-              children: columns,
-            };
-          } catch (error) {
-            console.error('Error fetching column list:', error);
-            return {
-              ...block,
-              children: [],
-            };
-          }
-        }
-
-        return block;
-      })
+      (blocks.results || []).map(processBlock)
     );
 
-    // Retornamos tanto los metadatos de la página como los bloques
     return {
       page,
       blocks: processedBlocks
