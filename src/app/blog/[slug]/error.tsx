@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import styles from './error.module.css';
+import styles from "./error.module.css";
 
 export default function Error({
   error,
@@ -13,12 +13,9 @@ export default function Error({
     <div className={styles.errorContainer}>
       <h2>Algo salió mal al cargar el artículo</h2>
       <p>{error.message}</p>
-      <button
-        onClick={() => reset()}
-        className={styles.retryButton}
-      >
+      <button onClick={() => reset()} className={styles.retryButton}>
         Intentar de nuevo
       </button>
     </div>
   );
-} 
+}

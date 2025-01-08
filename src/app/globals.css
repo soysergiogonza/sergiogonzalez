@@ -1,150 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  --max-width: 120ch;
-  --border-radius: 12px;
-
-  --rounded-full: 9999px;
-
-  --primary-color: #ff6464;
-  --primary-color__opacity: rgba(255, 100, 100, 0.3);
-
-  --transition: all .3s ease-in;
-
-  --background-color: rgb(17, 24, 39);
-  --aside-color: rgb(17, 24, 39);
-  --global-color: #ffffff;
-
-  --titles-special: #91cec2;
-  --bg-grey: #293038;
-  --span-subDescription: #9eabb8;
-
-  --notion-blue: #2196f3;
-  --notion-brown: #795548;
-  --notion-gray: #9e9e9e;
-  --notion-green: #4caf50;
-  --notion-orange: #ff9800;
-  --notion-pink: #e91e63;
-  --notion-purple: #9c27b0;
-  --notion-red: #f44336;
-  --notion-yellow: #ffeb3b;
-
-
-
-  --background-color: #0f1117;
-  --background-secondary: #1a1d24;
-  --background-elevated: #2a2d34;
+  --primary-color: #8b5cf6;
+  --secondary-color: #4f46e5;
+  --background-color: #0a0b1e;
+  --background-elevated: #141529;
+  --background-secondary: #0d0e24;
   --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --hover-color: rgba(255, 255, 255, 0.1);
-  --scrollbar-thumb: #4a4a4a;
-  --scrollbar-track: #2a2d34;
-
-  --code-block-bg: #1e1e1e;
-  --code-header-bg: #2d2d2d;
-  --code-inline-bg: rgba(135, 131, 120, 0.15);
-  --code-inline-color: #eb5757;
-  --border-color: #333;
+  --text-secondary: #94a3b8;
+  --border-color: #1e293b;
+  --code-inline-bg: #1e293b;
+  --code-inline-color: #7ee787;
+  --code-block-bg: #0d1117;
+  --code-header-bg: #161b22;
 }
 
-/* Para modo claro si lo necesitas */
-[data-theme="light"] {
-  --code-block-bg: #f6f8fa;
-  --code-header-bg: #f1f1f1;
-  --code-inline-bg: rgba(175, 184, 193, 0.2);
-  --code-inline-color: #0550ae;
-  --border-color: #e1e4e8;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-
-  &:after,
-  &:before {
-    box-sizing: border-box;
+@layer base {
+  html,
+  body {
+    @apply overflow-x-hidden max-w-[100vw];
   }
-  color: var(--global-color);
-}
 
-html,
-body {
-  overflow-x: hidden;
-  height: 100vh;
-}
-
-body {
-  background: var(--background-color);
-  color: rgb(156 163 175);
-  grid-template-rows: 100dvh;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+  body {
+    @apply bg-background text-text-primary antialiased;
   }
 }
 
-.content {
-  @media (min-width: 500px) {
-    grid-column: 3 / span 12;
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
   }
 
-  @media (min-width: 768px) {
-    grid-column: 5 / span 7;
+  .btn-primary {
+    @apply bg-primary hover:bg-opacity-90 text-white;
   }
 
-  @media (min-width: 1024px) {
-    grid-column: 4 / span 10;
+  .heading {
+    @apply font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
   }
-
-  height: 100vh;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: .3rem;
-}
-
-span {
-  strong {
-    color: inherit;
-    code {
-      color: inherit;
-    }
-  }
-  code {
-    color: inherit;
-  }
-}
-
-/* Añade estos estilos si quieres que se parezca más a Notion */
-.notion-content {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
-  line-height: 1.5;
-  color: rgb(55, 53, 47);
-}
-
-/* Estilos para los enlaces */
-.notion-content a {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: rgba(55, 53, 47, 0.4);
-}
-
-/* Estilos para el modo hover en elementos interactivos */
-.notion-content [role="button"]:hover {
-  background-color: rgba(55, 53, 47, 0.08);
-}
-
-main.content {
-    @media (min-width: 768px) {
-        padding-top: 6rem;
-    }
 }

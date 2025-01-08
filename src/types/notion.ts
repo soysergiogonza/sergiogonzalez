@@ -26,4 +26,4 @@ export interface Category {
 export interface ArticlesResponse {
   success: boolean;
   results: Category[];
-} 
+}

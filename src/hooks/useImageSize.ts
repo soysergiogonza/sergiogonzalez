@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface ImageSize {
   width: number;
@@ -25,4 +25,4 @@ export const useImageSize = (url: string): ImageSize | null => {
   }, [url]);
 
   return size;
-}; 
+};

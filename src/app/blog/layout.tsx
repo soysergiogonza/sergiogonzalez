@@ -1,7 +1,7 @@
-'use client';
-import styles from './Blog.module.css';
-import { Aside } from '@/components/blog/Aside';
-import { useEffect } from 'react';
+"use client";
+import { Aside } from "@/components/pages/blog/Aside";
+import { useEffect } from "react";
+import styles from "./Blog.module.css";
 
 export default function BlogLayout({
   children,
@@ -10,7 +10,7 @@ export default function BlogLayout({
 }) {
   useEffect(() => {
     document.body.classList.add(styles.blogBody);
-    
+
     return () => {
       document.body.classList.remove(styles.blogBody);
     };
@@ -21,9 +21,7 @@ export default function BlogLayout({
       <div className={styles.blogContainer}>
         <div className={styles.blogContent}>
           <Aside />
-          <main className={styles.blogMain}>
-            {children}
-          </main>
+          <main className={styles.blogMain}>{children}</main>
         </div>
       </div>
     </div>

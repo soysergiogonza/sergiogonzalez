@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { Category, Article } from '@/types/notion';
+import { create } from "zustand";
+import { Category, Article } from "@/types/notion";
 
 interface CategoryStore {
   categories: Category[];
@@ -23,9 +23,9 @@ export const useCategoryStore = create<CategoryStore>((set, get) => ({
   error: null,
 
   setCategories: (categories) => {
-    const formattedCategories = categories.map(category => ({
+    const formattedCategories = categories.map((category) => ({
       ...category,
-      articles: category.articles || []
+      articles: category.articles || [],
     }));
     set({ categories: formattedCategories });
   },
@@ -36,29 +36,31 @@ export const useCategoryStore = create<CategoryStore>((set, get) => ({
 
   getArticlesByCategory: (category) => {
     const { categories } = get();
-    const categoryData = categories.find(cat => cat.category === category);
+    const categoryData = categories.find((cat) => cat.category === category);
     return categoryData?.articles || [];
   },
 
   getAllArticles: () => {
     const { categories } = get();
-    return categories.flatMap(category => category.articles);
+    return categories.flatMap((category) => category.articles);
   },
 
   fetchCategories: async () => {
     set({ isLoading: true, error: null });
     try {
-      const response = await fetch('/api/blog/articles');
+      const response = await fetch("/api/blog/articles");
       const data = await response.json();
       if (data.success) {
         get().setCategories(data.results);
       } else {
-        set({ error: 'Error al cargar las categorías' });
+        set({ error: "Error al cargar las categorías" });
       }
     } catch (error) {
-      set({ error: error instanceof Error ? error.message : 'Error desconocido' });
+      set({
+        error: error instanceof Error ? error.message : "Error desconocido",
+      });
     } finally {
       set({ isLoading: false });
     }
-  }
+  },
 }));

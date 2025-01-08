@@ -1,1 +1,1 @@
-export * from "./NavItem";
+export * from "@/components/ui/Header/NavItem";

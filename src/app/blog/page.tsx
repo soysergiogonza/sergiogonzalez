@@ -1,11 +1,13 @@
-import { Suspense } from 'react';
-import styles from './Blog.module.css';
-import { Category } from '@/types/notion';
-import { getArticles } from '@/lib/api';
+import { Suspense } from "react";
+import styles from "./Blog.module.css";
+import { Category } from "@/types/notion";
+import { getArticles } from "@/lib/api";
 
 export default async function BlogPage() {
   const categories = await getArticles();
-  const allArticles = categories.flatMap((category: Category) => category.articles);
+  const allArticles = categories.flatMap(
+    (category: Category) => category.articles,
+  );
 
   return (
     <div>
@@ -19,7 +21,7 @@ export default async function BlogPage() {
                 {category.articles.map((article) => (
                   <article key={article.id} className={styles.articleCard}>
                     {article.coverImage && (
-                      <img 
+                      <img
                         src={article.coverImage}
                         alt={article.title}
                         className={styles.coverImage}
@@ -28,10 +30,14 @@ export default async function BlogPage() {
                     <div className={styles.articleContent}>
                       <h2 className={styles.articleTitle}>{article.title}</h2>
                       {article.excerpt && (
-                        <p className={styles.articleExcerpt}>{article.excerpt}</p>
+                        <p className={styles.articleExcerpt}>
+                          {article.excerpt}
+                        </p>
                       )}
                       <div className={styles.articleMeta}>
-                        <span className={styles.articleCategory}>{article.category}</span>
+                        <span className={styles.articleCategory}>
+                          {article.category}
+                        </span>
                       </div>
                     </div>
                   </article>

@@ -14,4 +14,4 @@ export interface NotionPage {
       rich_text: Array<{ plain_text: string }>;
     };
   };
-} 
+}

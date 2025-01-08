@@ -1,8 +1,8 @@
-import { Client } from '@notionhq/client';
-import { NOTION_API_KEY } from '@/environments/environments';
+import { Client } from "@notionhq/client";
+import { NOTION_API_KEY } from "@/environments/environments";
 
 if (!NOTION_API_KEY) {
-  throw new Error('NOTION_API_KEY es requerido');
+  throw new Error("NOTION_API_KEY es requerido");
 }
 
 export const notion = new Client({
@@ -24,7 +24,7 @@ async function processBlock(block: any): Promise<any> {
     const children = await Promise.all(
       (childBlocks.results || []).map(async (childBlock) => {
         return await processBlock(childBlock);
-      })
+      }),
     );
 
     // Asignar los hijos procesados al bloque
@@ -36,26 +36,26 @@ async function processBlock(block: any): Promise<any> {
 
   // Procesar tipos específicos de bloques
   switch (block.type) {
-    case 'numbered_list_item':
-    case 'bulleted_list_item':
-    case 'toggle':
-    case 'column_list':
-    case 'column':
-    case 'synced_block':
-    case 'template':
-    case 'child_page':
-    case 'child_database':
+    case "numbered_list_item":
+    case "bulleted_list_item":
+    case "toggle":
+    case "column_list":
+    case "column":
+    case "synced_block":
+    case "template":
+    case "child_page":
+    case "child_database":
       // Asegurarse de que estos tipos de bloques mantengan su estructura
       return processedBlock;
-    
-    case 'embed':
+
+    case "embed":
       // Procesar embeds específicos (Figma, Excalidraw, etc.)
       return {
         ...processedBlock,
         embed: {
           ...block.embed,
-          processedUrl: block.embed.url // Aquí podrías procesar la URL según el tipo de embed
-        }
+          processedUrl: block.embed.url, // Aquí podrías procesar la URL según el tipo de embed
+        },
       };
 
     default:
@@ -74,15 +74,15 @@ export async function getNotionContent(pageId: string) {
     });
 
     const processedBlocks = await Promise.all(
-      (blocks.results || []).map(processBlock)
+      (blocks.results || []).map(processBlock),
     );
 
     return {
       page,
-      blocks: processedBlocks
+      blocks: processedBlocks,
     };
   } catch (error) {
-    console.error('Error fetching Notion content:', error);
+    console.error("Error fetching Notion content:", error);
     throw error;
   }
-} 
+}

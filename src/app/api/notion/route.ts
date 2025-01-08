@@ -1,13 +1,13 @@
-import { NextResponse } from 'next/server';
-import { notion } from '@/lib/notion';
-import { NOTION_DATABASE_ID } from '@/environments/environments';
+import { NextResponse } from "next/server";
+import { notion } from "@/lib/notion";
+import { NOTION_DATABASE_ID } from "@/environments/environments";
 
 export async function GET() {
   try {
     if (!NOTION_DATABASE_ID) {
       return NextResponse.json(
-        { error: 'NOTION_DATABASE_ID no configurado' },
-        { status: 500 }
+        { error: "NOTION_DATABASE_ID no configurado" },
+        { status: 500 },
       );
     }
 
@@ -19,18 +19,21 @@ export async function GET() {
     return NextResponse.json({ blocks: blocks.results });
   } catch (error) {
     return NextResponse.json(
-      { error: 'Error al obtener datos de Notion' },
-      { status: 500 }
+      { error: "Error al obtener datos de Notion" },
+      { status: 500 },
     );
   }
 }
 
 export async function OPTIONS(request: Request) {
-  return NextResponse.json({}, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  return NextResponse.json(
+    {},
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
     },
-  }); 
+  );
 }
