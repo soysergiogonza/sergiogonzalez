@@ -6,6 +6,7 @@ import { Navigation } from "@/components/ui/Header/Navigation";
 import { Inter } from "@/utils/utils";
 import clsx from "clsx";
 import type { ReactNode } from "react";
+import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
   title: "Sergio González Sánchez",
@@ -32,9 +33,10 @@ const RootLayout = ({
         <BackgroundCircle />
         <Header />
         <Navigation isMobile={true} />
-        <main className='pb-20 md:pb-0 max-w-full overflow-x-hidden'>
+        <main className='pt-16 md:pt-20 pb-20 md:pb-0 max-w-full overflow-x-hidden'>
           {children}
         </main>
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );
