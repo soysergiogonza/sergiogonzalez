@@ -6,36 +6,38 @@ import styles from "./NotionRenderer.module.css";
 import { CopyButton } from "../CopyButton";
 import { useImageSize } from "@/hooks/useImageSize";
 import { ImageZoom } from "../ImageZoom";
-import { NotionColor } from "@/lib/notion/colors";
-import { NOTION_COLORS } from "@/lib/notion/colors";
+import { NotionColor, NOTION_COLORS } from "@/lib/notion/colors";
+import type { NotionData, NotionBlock } from "@/features/blog/types";
+import type { TitlePropertyValue } from "@notionhq/client/build/src/api-endpoints";
 
-interface NotionRendererProps {
-  notionData: {
-    page: any;
-    blocks: any[];
+interface RichTextItem {
+  annotations?: {
+    bold?: boolean;
+    italic?: boolean;
+    code?: boolean;
+    strikethrough?: boolean;
+    underline?: boolean;
+    color?: NotionColor;
   };
+  href?: string;
+  plain_text?: string;
 }
 
-export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
-  console.log("Datos completos:", {
-    page: notionData.page,
-    pageTitle: notionData.page?.properties?.title?.title?.[0]?.plain_text,
-    blocksLength: notionData.blocks?.length,
-  });
-
+export const NotionRenderer = ({ notionData }: { notionData: NotionData }) => {
   const blocks = Array.isArray(notionData.blocks) ? notionData.blocks : [];
-  const pageTitle = notionData.page?.properties?.title?.title?.[0]?.plain_text;
+  const titleProperty = notionData.page?.properties?.title as TitlePropertyValue;
+  const pageTitle = titleProperty?.title?.[0]?.plain_text;
 
-  const renderRichText = (richText: any[]) => {
+  const renderRichText = (richText: RichTextItem[]) => {
     if (!richText || !Array.isArray(richText)) return null;
 
-    return richText.map((text: any, index: number) => {
+    return richText.map((text, index) => {
       const color = text?.annotations?.color as NotionColor;
       const textColor = NOTION_COLORS[color] || NOTION_COLORS.default;
 
       return (
         <span
-          key={index}
+          key={`${text?.plain_text}-${index}`}
           className={`
             ${text?.annotations?.bold ? "font-bold" : ""}
             ${text?.annotations?.italic ? "italic" : ""}
@@ -45,17 +47,15 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
           `}
           style={{
             color: color && color !== "default" ? textColor : undefined,
-            backgroundColor: color?.includes("background")
-              ? textColor
-              : undefined,
+            backgroundColor: color?.includes("background") ? textColor : undefined,
           }}
         >
           {text?.href ? (
             <a
               href={text.href}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='text-primary border-b border-transparent hover:border-primary transition-colors'
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary border-b border-transparent hover:border-primary transition-colors"
             >
               {text?.plain_text || ""}
             </a>
@@ -67,17 +67,18 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
     });
   };
 
-  const renderBlock = (block: any) => {
-    if (!block?.type) return null;
+  const renderChildren = (block: NotionBlock) => {
+    if (!block.children || !Array.isArray(block.children)) return null;
 
-    const renderChildren = (blockChildren: any[]) => {
-      if (!Array.isArray(blockChildren)) return null;
-      return blockChildren.map((child: any) => (
-        <div key={child.id} className={styles.block}>
-          {renderBlock(child)}
-        </div>
-      ));
-    };
+    return block.children.map((child) => (
+      <div key={child.id || `child-${Math.random()}`} className={styles.block}>
+        {renderBlock(child)}
+      </div>
+    ));
+  };
+
+  const renderBlock = (block: NotionBlock) => {
+    if (!block || !block.id) return null;
 
     switch (block.type) {
       case "paragraph":
@@ -129,7 +130,7 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
             {renderRichText(block.numbered_list_item.rich_text)}
             {block.has_children && (
               <ol className={styles.nestedList}>
-                {renderChildren(block.children)}
+                {renderChildren(block)}
               </ol>
             )}
           </li>
@@ -141,7 +142,7 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
             {renderRichText(block.bulleted_list_item.rich_text)}
             {block.has_children && (
               <ul className={styles.nestedList}>
-                {renderChildren(block.children)}
+                {renderChildren(block)}
               </ul>
             )}
           </li>
@@ -154,7 +155,7 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
               {renderRichText(block.toggle.rich_text)}
             </summary>
             <div className={styles.toggleContent}>
-              {block.has_children && renderChildren(block.children)}
+              {block.has_children && renderChildren(block)}
             </div>
           </details>
         );
@@ -276,14 +277,24 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
 
       case "column_list":
         return (
-          <div className={styles.columnList}>
+          <div key={block.id} className={styles.columnList}>
             {block.children &&
               Array.isArray(block.children) &&
-              block.children.map((column: any) => (
-                <div key={column.id || Math.random()} className={styles.column}>
+              block.children.map((column) => (
+                <div 
+                  key={column.id || `column-${Math.random()}`} 
+                  className={styles.column}
+                >
                   {column.children &&
                     Array.isArray(column.children) &&
-                    column.children.map((child: any) => renderBlock(child))}
+                    column.children.map((child) => (
+                      <div 
+                        key={child.id || `column-child-${Math.random()}`}
+                        className={styles.columnChild}
+                      >
+                        {renderBlock(child)}
+                      </div>
+                    ))}
                 </div>
               ))}
           </div>
@@ -294,7 +305,14 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
           <div className={styles.columnContent}>
             {block.children &&
               Array.isArray(block.children) &&
-              block.children.map((child: any) => renderBlock(child))}
+              block.children.map((child) => (
+                <div 
+                  key={child.id || `column-content-${Math.random()}`}
+                  className={styles.columnContentItem}
+                >
+                  {renderBlock(child)}
+                </div>
+              ))}
           </div>
         );
 
@@ -316,13 +334,11 @@ export const NotionRenderer = ({ notionData }: NotionRendererProps) => {
   return (
     <div className={styles.notionContent}>
       {pageTitle && <h1 className={styles.pageTitle}>{pageTitle}</h1>}
-      {blocks &&
-        blocks.length > 0 &&
-        blocks.map((block: any) => (
-          <div key={block?.id || Math.random()} className={styles.block}>
-            {renderBlock(block)}
-          </div>
-        ))}
+      {blocks.map((block) => (
+        <div key={block.id || `block-${Math.random()}`} className={styles.block}>
+          {renderBlock(block)}
+        </div>
+      ))}
     </div>
   );
 };

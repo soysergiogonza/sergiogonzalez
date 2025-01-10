@@ -1,19 +1,14 @@
-.blogBody {
-  overflow: hidden !important;
-}
 .blog {
   width: 100%;
-  height: calc(100vh - 64px);
+  height: calc(100dvh - 64px);
   background-color: var(--background-color);
-  overflow: hidden;
 }
 
 .blogContainer {
-  height: 100%;
   max-width: 1440px;
+  height: 100%;
   margin: 0 auto;
   padding: 2rem;
-  overflow: hidden;
 }
 
 .blogContent {
@@ -21,22 +16,49 @@
   grid-template-columns: 280px 1fr;
   gap: 2rem;
   height: 100%;
-  padding-bottom: 2rem;
 }
 
 .blogMain {
   position: relative;
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto;
+  padding-right: 1rem;
 }
 
 .blogAside {
-  position: relative;
+  position: sticky;
+  top: 0;
   height: 100%;
   background-color: var(--background-secondary);
   border-radius: 1rem;
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+/* Personalizar scrollbar solo para los elementos que lo necesitan */
+.blogMain::-webkit-scrollbar,
+.blogAside::-webkit-scrollbar {
+  display: block; /* Mostrar scrollbar */
+  width: 4px;
+}
+
+.blogMain::-webkit-scrollbar-track,
+.blogAside::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.blogMain::-webkit-scrollbar-thumb,
+.blogAside::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
+/* Para Firefox */
+.blogMain,
+.blogAside {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) transparent;
 }
 
 .routes {
@@ -186,9 +208,13 @@
   }
 }
 
-@media (width <= 1024px) {
+@media (max-width: 1024px) {
   .blogContent {
     grid-template-columns: 1fr;
+  }
+  
+  .blogAside {
+    display: none;
   }
 }
 
