@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rules SYSTEM "https://resources.jetbrains.com/writerside/1.0/redirection-rules.dtd">
+<rules>
+    <!-- format is as follows
+    <rule id="<unique id>">
+        <accepts>page.html</accepts>
+    </rule>
+    -->
+    <rule id="441f5f40">
+        <description>Created after removal of "Home Feature" from Portfolio Documentation</description>
+        <accepts>home-md.html</accepts>
+    </rule>
+    <rule id="1f56b52b">
+        <description>Created after removal of "home-components.md" from Portfolio Documentation</description>
+        <accepts>home-components-md.html</accepts>
+    </rule>
+</rules>

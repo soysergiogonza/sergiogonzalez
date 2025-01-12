@@ -1,11 +1,8 @@
 "use client";
 
-import {
-  About,
-  Hero,
-  ProfessionalExperience,
-  Skills,
-} from "../components/pages/home";
+import { Hero } from "@/components/pages/home/Hero";
+import { Skills, ProfessionalExperience } from "@/features/home/presentation/containers";
+import { About } from "@/components/pages/home/About";
 
 const Home = () => {
   return (

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="portfolio-docs"
+                 name="Portfolio Documentation"
+                 start-page="starter-topic.md">
+
+    <toc-element topic="starter-topic.md">
+        <toc-element toc-title="Home">
+            <toc-element topic="home-overview-md.md"/>
+            <toc-element topic="home-architecture-md.md"/>
+            <toc-element topic="home-domain-md.md"/>
+            <toc-element topic="home-infrastructure-md.md"/>
+            <toc-element toc-title="Components">
+                <toc-element topic="error-boundary-md.md"/>
+                <toc-element topic="loading-states-md.md"/>
+                <toc-element topic="skills-list-md.md"/>
+                <toc-element topic="experience-list-md.md"/>
+            </toc-element>
+        </toc-element>
+    </toc-element>
+</instance-profile>

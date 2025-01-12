@@ -1,11 +1,33 @@
-import type { Experiences } from "@/components/pages/home/types";
+export enum CompanyType {
+  STARTUP = 'Startup',
+  ENTERPRISE = 'Enterprise',
+  FREELANCE = 'Freelance',
+  EDUCATION = 'Education',
+  CONTRACT = 'Contract',
+  TEMPORAL = 'Temporal'
+}
 
-export const experiences: Experiences[] = [
+export interface WorkExperience {
+  id: string;
+  title: string;
+  company: string;
+  type: CompanyType;
+  location: string;
+  link: string;
+  startDate: string;
+  endDate?: string;
+  duration: string;
+  logo: string;
+  description: string[];
+  skills: string[];
+}
+
+export const WORK_EXPERIENCES: WorkExperience[] = [
   {
     id: "job1",
     title: "Profesor en Desarrollo Frontend",
     company: "Politécnico ASYS",
-    badge: "Temporal",
+    type: CompanyType.TEMPORAL,
     location: "Rionegro, Antioquia, Colombia",
     link: "https://asys.edu.co/",
     startDate: "Febrero 2024",
@@ -35,7 +57,7 @@ export const experiences: Experiences[] = [
     id: "job2",
     title: "Profesor en Desarrollo Frontend",
     company: "Centro de Sistemas de Antioquia - CENSA",
-    badge: "Temporal",
+    type: CompanyType.TEMPORAL,
     location: "Rionegro, Antioquia, Colombia",
     link: "https://www.censa.edu.co/",
     startDate: "Noviembre 2024",
@@ -63,7 +85,7 @@ export const experiences: Experiences[] = [
     id: "job3",
     title: "Frontend Developer Lead",
     company: "Wyncell",
-    badge: "Full-time",
+    type: CompanyType.ENTERPRISE,
     location: "Miami, Florida, United States",
     link: "https://wyncell.com/",
     startDate: "Junio 2024",
@@ -94,7 +116,7 @@ export const experiences: Experiences[] = [
     id: "job4",
     title: "Frontend Developer",
     company: "Ark 305",
-    badge: "Freelance",
+    type: CompanyType.FREELANCE,
     location: "Colombia - Remote",
     link: "https://ark305.com/",
     startDate: "Abril 2024",
@@ -114,7 +136,7 @@ export const experiences: Experiences[] = [
     id: "job5",
     title: "React Frontend Developer",
     company: "EvolutionCode",
-    badge: "Full-time",
+    type: CompanyType.ENTERPRISE,
     location: "Miami, Florida, United States",
     link: "https://evolutioncode.com/",
     startDate: "Septiembre 2022",
@@ -135,7 +157,7 @@ export const experiences: Experiences[] = [
     id: "job6",
     title: "Profesor Desarrollo Web",
     company: "Cetasdi",
-    badge: "Contract",
+    type: CompanyType.CONTRACT,
     location: "Rionegro, Antioquia, Colombia",
     link: "https://cetasdi.edu.co/",
     startDate: "Noviembre 2020",
@@ -153,4 +175,4 @@ export const experiences: Experiences[] = [
       "Git"
     ]
   }
-];
+]; 
