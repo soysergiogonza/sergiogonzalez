@@ -1,5 +1,4 @@
 import { Experience } from '../../domain/entities/Experience';
-import { Skill } from '../../domain/entities/Skill';
 
 export interface ExperienceListProps {
   experiences: Experience[];
@@ -8,7 +7,6 @@ export interface ExperienceListProps {
 }
 
 export interface SkillsListProps {
-  skills: Skill[];
   isLoading: boolean;
   error: string | null;
 } 

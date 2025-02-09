@@ -5,7 +5,7 @@ import { SkillsLoading } from '../components/LoadingStates';
 import { Krypton } from '@/utils/utils';
 
 export const Skills = () => {
-  const { skills, isLoading, error } = useSkills();
+  const {isLoading, error } = useSkills();
 
   return (
     <HomeErrorBoundary>
@@ -17,7 +17,6 @@ export const Skills = () => {
           <SkillsLoading />
         ) : (
           <SkillsList 
-            skills={skills}
             isLoading={isLoading}
             error={error}
           />

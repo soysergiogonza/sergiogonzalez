@@ -5,82 +5,76 @@ import {
 import { 
   SiTypescript, SiNextdotjs, SiTailwindcss 
 } from 'react-icons/si';
+import { v4 as uuid } from 'uuid';
 
 export enum TechCategory {
   FRONTEND = 'Frontend',
   BACKEND = 'Backend',
-  TOOLS = 'Tools'
-}
-
-export enum TechLevel {
-  BASIC = 'Básico',
-  INTERMEDIATE = 'Intermedio',
-  ADVANCED = 'Avanzado'
 }
 
 export interface TechStack {
   id: string;
+  name: string;
   icon: IconType;
   color: string;
   category: TechCategory;
-  level: TechLevel;
 }
 
 export const TECH_STACK: TechStack[] = [
   {
-    id: 'react',
+    id: uuid(),
+    name: 'react',
     icon: FaReact,
     color: '#61DAFB',
     category: TechCategory.FRONTEND,
-    level: TechLevel.ADVANCED
   },
   {
-    id: 'javascript',
+    id: uuid(),
+    name: 'javascript',
     icon: FaJs,
     color: '#F7DF1E',
     category: TechCategory.FRONTEND,
-    level: TechLevel.ADVANCED
   },
   {
-    id: 'typescript',
+    id: uuid(),
+    name: 'typescript',
     icon: SiTypescript,
     color: '#3178C6',
     category: TechCategory.FRONTEND,
-    level: TechLevel.ADVANCED
   },
   {
-    id: 'nextjs',
+    id: uuid(),
+    name: 'nextjs',
     icon: SiNextdotjs,
     color: '#ffffff',
     category: TechCategory.FRONTEND,
-    level: TechLevel.ADVANCED
   },
   {
-    id: 'html',
+    id: uuid(),
+    name: 'html',
     icon: FaHtml5,
     color: '#E34F26',
     category: TechCategory.FRONTEND,
-    level: TechLevel.ADVANCED
   },
   {
-    id: 'css',
+    id: uuid(),
+    name: 'css',
     icon: FaCss3Alt,
     color: '#1572B6',
     category: TechCategory.FRONTEND,
-    level: TechLevel.ADVANCED
   },
   {
-    id: 'tailwind',
+    id: uuid(),
+    name: 'tailwind',
     icon: SiTailwindcss,
     color: '#06B6D4',
     category: TechCategory.FRONTEND,
-    level: TechLevel.ADVANCED
   },
   {
-    id: 'node',
+    id: uuid(),
+    name: 'node',
     icon: FaNode,
     color: '#339933',
     category: TechCategory.BACKEND,
-    level: TechLevel.ADVANCED
   }
 ]; 
