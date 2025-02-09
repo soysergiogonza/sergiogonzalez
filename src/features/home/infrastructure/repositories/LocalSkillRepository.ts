@@ -16,10 +16,11 @@ export class LocalSkillRepository implements ISkillRepository {
 
   private getLevelValue(level: string): number {
     const levelValues = {
-      'Básico': 40,
+      'Basic': 40,
       'Intermedio': 70,
       'Avanzado': 90
     };
+    // @ts-ignore
     return levelValues[level] || 50;
   }
 
@@ -33,4 +34,4 @@ export class LocalSkillRepository implements ISkillRepository {
       .filter(skill => skill.isAdvanced())
       .slice(0, limit);
   }
-} 
+}

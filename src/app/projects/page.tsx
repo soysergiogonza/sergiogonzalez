@@ -57,7 +57,9 @@ const ProjectsPage = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
         {filteredProjects.length > 0 ? (
           filteredProjects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+            <ProjectCard key={project.title}
+              // @ts-ignore
+                         project={project}/>
           ))
         ) : (
           <p className="text-gray-400 col-span-2 text-center text-lg">

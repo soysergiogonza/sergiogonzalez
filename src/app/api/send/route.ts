@@ -21,13 +21,13 @@ export async function POST(request: Request) {
 
     try {
       const data = await resend.emails.send({
+        replyTo: email,
         from: 'Sergio González <onboarding@resend.dev>',
         to: 'soysergiogonza@gmail.com',
-        reply_to: email,
         subject: `✨ Nuevo mensaje de ${name}`,
         html: `
           <!DOCTYPE html>
-          <html>
+          <html lang="es">
             <head>
               <meta charset="utf-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,8 +65,8 @@ export async function POST(request: Request) {
 
                   <!-- Action Button -->
                   <div style="text-align: center;">
-                    <a href="mailto:${email}" 
-                       style="display: inline-block; padding: 12px 24px; background: linear-gradient(to right, #3b82f6, #8b5cf6); 
+                    <a href="mailto:${email}"
+                       style="display: inline-block; padding: 12px 24px; background: linear-gradient(to right, #3b82f6, #8b5cf6);
                               color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 500;">
                       Responder a ${name}
                     </a>
@@ -85,7 +85,7 @@ export async function POST(request: Request) {
               </div>
             </body>
           </html>
-        `,
+        `
       });
 
       return NextResponse.json(

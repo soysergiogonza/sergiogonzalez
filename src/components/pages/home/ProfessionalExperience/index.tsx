@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Krypton } from "@/utils/utils";
 import Image from "next/image";
-import {experiences} from "@/components/pages/home/ProfessionalExperience/data";
+import {WORK_EXPERIENCES} from '@/features/home/domain/constants/experiences';
 
 export const ProfessionalExperience = () => {
   return (
@@ -10,7 +10,7 @@ export const ProfessionalExperience = () => {
               Professional Experience
           </h2>
           <ul className="mt-8 space-y-4">
-              {experiences.map((project) => {
+              {WORK_EXPERIENCES.map((project) => {
                   const [isOpen, setIsOpen] = useState(false);
 
                   return (
@@ -34,7 +34,7 @@ export const ProfessionalExperience = () => {
                                       <p className="font-semibold text-lg">{project.title}</p>
                                       <div className="flex justify-between text-sm text-span-subDescription mt-1">
                       <span>
-                        {project.company} · {project.badge} · {project.location}
+                        {project.company} · {project.type} · {project.location}
                       </span>
                                           <span>
                         {project.startDate} - {project.endDate || "Present"}

@@ -1,5 +1,5 @@
 import type { NavItemProps } from "@/components/ui/Header/types";
-import { FaBlog, FaEnvelope, FaHome, FaProjectDiagram } from "react-icons/fa";
+import { FaEnvelope, FaHome, FaProjectDiagram } from "react-icons/fa";
 
 export const pages: NavItemProps[] = [
   {
@@ -16,10 +16,5 @@ export const pages: NavItemProps[] = [
     label: "Contact",
     href: "/contact",
     icon: FaEnvelope,
-  },
-  {
-    label: "Blog",
-    href: "/blog",
-    icon: FaBlog,
   },
 ];

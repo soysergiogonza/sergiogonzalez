@@ -33,4 +33,4 @@ export const useSkills = () => {
     error,
     refetch: fetchSkills
   };
-}; 
+};
